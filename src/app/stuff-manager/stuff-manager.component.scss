@@ -40,44 +40,38 @@ img {
   grid-area: title;
   width: 75%;
   height: 100%;
-  @include gridCenter;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: "msg lvl money";
+  @include flexInRow;
+  justify-content: space-around;
+
   .msg {
-    width: 100%;
-    height: 100%;
     grid-area: msg;
     @include flexInColumn;
+
     h1 {
       @extend .capFont;
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
     p {
       @extend .boldFont;
-      font-size: 1.5rem;
+      font-size: 1rem;
     }
   }
   .lvl {
-    width: 100%;
-    height: 100%;
     grid-area: lvl;
     @include flexInColumn;
     @extend .boldFont;
     p {
       @extend .boldFont;
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
   }
   .money {
-    width: 100%;
-    height: 100%;
     grid-area: money;
     @include flexInColumn;
     @extend .boldFont;
     p {
       @extend .boldFont;
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
   }
 }
@@ -91,11 +85,12 @@ img {
   height: 100%;
   @include flexInRow;
   justify-content: space-around;
-  overflow-x: auto;
+  overflow: auto;
   .teamFighters {
     @include shadowed;
     border-radius: 0.5rem;
     height: 95%;
+    min-height: 10vh;
     background: url("../../assets/img/card.jpg") no-repeat center;
     background-size: cover;
     box-sizing: border-box;
@@ -116,6 +111,7 @@ img {
     .teamFightersImg {
       grid-area: teamFightersImg;
       width: 5rem;
+      max-width: 10vh;
       border-radius: 50%;
     }
     .teamFightersButton {
@@ -153,6 +149,7 @@ img {
       @include flexInRow;
       justify-content: space-around;
       width: 100%;
+      max-width: 25vh;
       height: 100%;
       padding: 1rem;
       img {

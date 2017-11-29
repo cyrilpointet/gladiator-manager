@@ -14,6 +14,7 @@
   grid-template-areas: "enseigne  buttonsField message message" "market market team team";
 }
 
+
 button {
     font-size: 1.5rem;
     padding: 1.5rem;
@@ -91,6 +92,11 @@ button {
     height: 100%;
     border-radius: 0.5rem;
     grid-area: navButton;
+    button {
+      width: 45%;
+      height: 45%;
+      padding: 0.5rem;
+    }
   }
   .navMessage {
     @include gridCenter;

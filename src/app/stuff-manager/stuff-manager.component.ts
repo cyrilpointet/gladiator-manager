@@ -76,6 +76,9 @@ export class StuffManagerComponent implements OnInit {
   goHome() {
     this.router.navigate(['']);
   }
+  goMarket() {
+    this.router.navigate(['market']);
+  }
   goArena() {
     this.router.navigate(['arena']);
   }

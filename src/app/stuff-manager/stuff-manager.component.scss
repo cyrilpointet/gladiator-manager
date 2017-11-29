@@ -1,13 +1,12 @@
 @import '../../sass/style';
-
 .ludus {
   font-family: 'mainFont', serif;
   background: url('../../assets/img/marble.jpg');
   width: 100vw;
   height: 100vh;
   @include gridCenter;
-  grid-template-rows: 2fr 3fr 6fr 6fr 2fr;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 10vh 15vh 30vh 30vh 15vh;
+  grid-template-columns: 50% 50%;
   grid-template-areas: "title title" "fighterSelection fighterSelection" "selectedFighter teamWeaponList" "selectedFighter teamArmorList" "buttons buttons"
 }
 
@@ -26,7 +25,7 @@ button {
 .buttons {
   @include shadowed;
   box-sizing: border-box;
-  border-radius: 0.5rem;  
+  border-radius: 0.5rem;
   padding: 1rem;
 }
 
@@ -39,8 +38,8 @@ img {
   border: solid rgba(0, 0, 0, 0.25) 0.5rem;
   box-sizing: border-box;
   grid-area: title;
-  width: 95%;
-  height: 95%;
+  width: 75%;
+  height: 100%;
   @include gridCenter;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
@@ -69,7 +68,6 @@ img {
       @extend .boldFont;
       font-size: 2.5rem;
     }
-    
   }
   .money {
     width: 100%;
@@ -81,9 +79,7 @@ img {
       @extend .boldFont;
       font-size: 2.5rem;
     }
-    
   }
-
 }
 
 .fighterSelection {
@@ -91,8 +87,8 @@ img {
   border: solid rgba(0, 0, 0, 0.25) 0.5rem;
   box-sizing: border-box;
   grid-area: fighterSelection;
-  width: 95%;
-  height: 95%;
+  width: 75%;
+  height: 100%;
   @include flexInRow;
   justify-content: space-around;
   overflow-x: auto;
@@ -103,13 +99,12 @@ img {
     background: url("../../assets/img/card.jpg") no-repeat center;
     background-size: cover;
     box-sizing: border-box;
-    border: solid white 0.25rem;
+    border: solid rgba(255, 255, 255, 0.25) 0.25rem;
     padding: 0.25rem;
     @include gridCenter;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas: "teamFightersImg teamFightersName" "teamFightersImg teamFightersButton";
-
     .teamFightersName {
       grid-area: teamFightersName;
       @include gridCenter;
@@ -120,7 +115,7 @@ img {
     }
     .teamFightersImg {
       grid-area: teamFightersImg;
-      width:5rem;
+      width: 5rem;
       border-radius: 50%;
     }
     .teamFightersButton {
@@ -133,11 +128,11 @@ img {
 
 .selectedFighter {
   background: url('../../assets/img/leatherBackground.jpg');
-  border: solid rgba(0, 0, 0, 0.25) 0.5rem;
+  border: solid rgba(255, 255, 255, 0.25) 0.5rem;
   box-sizing: border-box;
   grid-area: selectedFighter;
-  width: 95%;
-  height: 95%;
+  width: 96%;
+  height: 98%;
   display: grid;
   justify-items: center;
   align-items: center;
@@ -147,44 +142,124 @@ img {
   .stats {
     grid-area: stats;
     width: 100%;
-    height: 100%
+    height: 100%;
+    @include gridCenter;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "selectedFighterImg" "selectedFighterStats";
+    .selectedFighterImg {
+      grid-area: selectedFighterImg;
+      box-sizing: border-box;
+      @include flexInRow;
+      justify-content: space-around;
+      width: 100%;
+      height: 100%;
+      padding: 1rem;
+      img {
+        width: 100%;
+        border-radius: 2rem;
+        border: solid rgba(255, 255, 255, 0.5) 0.5rem;
+        box-sizing: border-box;
+      }
+    }
+    .selectedFighterStats {
+      background: url('../../assets/img/card.jpg');
+      grid-area: selectedFighterStats;
+      box-sizing: border-box;
+      border-radius: 0.5rem;
+      border: solid rgba(255, 255, 255, 0.5) 0.25rem;
+      @extend .boldFont;
+      @include flexInColumn;
+      justify-content: space-around;
+      width: 100%;
+      height: 100%;
+      input {
+        @extend .capFont;
+        font-size: 1.5rem;
+        background: url("../../assets/img/card.jpg") no-repeat center;
+        background-size: cover;
+        @include shadowed;
+        text-align: center;
+      }
+    }
+  }
+  .selectedFighterStuff {
+    background: url("../../assets/img/card.jpg") no-repeat center;
+    background-size: cover;
+    @include shadowed;
+    width: 100%;
+    height: 96%;
+    @include flexInRow;
+    justify-content: space-around;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    border: solid rgba(255, 255, 255, 0.5) 0.25rem;
+    @extend .boldFont;
+    img {
+      width: 40%;
+      border-radius: 1rem;
+    }
+    div {
+      height: 100%;
+      @include flexInColumn;
+      justify-content: space-around;
+      p:first-child {
+        font-size: 1.5rem;
+      }
+    }
+    button {
+      padding: 1rem;
+    }
   }
   .wornWeapon {
     grid-area: wornWeapon;
-    width: 100%;
-    height: 100%
   }
   .wornArmor {
     grid-area: wornArmor;
-    width: 100%;
-    height: 100%
   }
 }
 
 .teamWeaponList {
-  background: url('../../assets/img/leatherBackground.jpg');
-  border: solid rgba(0, 0, 0, 0.25) 0.5rem;
-  box-sizing: border-box;
   grid-area: teamWeaponList;
-  width: 95%;
-  height: 95%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around
 }
 
 .teamArmorList {
+  grid-area: teamArmorList;
+}
+
+.teamList {
   background: url('../../assets/img/leatherBackground.jpg');
   border: solid rgba(0, 0, 0, 0.25) 0.5rem;
   box-sizing: border-box;
-  grid-area: teamArmorList;
-  width: 95%;
-  height: 95%;
+  width: 100%;
+  height: 96%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around
+  justify-content: space-around;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  div {
+    width: 9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border: solid rgba(255, 255, 255, 0.5) 0.25rem;
+    box-sizing: border-box;
+    background: url("../../assets/img/card.jpg") no-repeat center;
+    background-size: cover;
+    margin: 1rem;
+    padding: 1rem;
+    img {
+      width: 4rem;
+      border-radius: 0.5rem;
+      margin: 0.5rem;
+    }
+    button {
+      padding: 0.5rem;
+    }
+  }
 }
 
 .buttons {
@@ -192,8 +267,8 @@ img {
   border: solid rgba(0, 0, 0, 0.25) 0.5rem;
   box-sizing: border-box;
   grid-area: buttons;
-  width: 95%;
-  height: 95%;
+  width: 75%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;

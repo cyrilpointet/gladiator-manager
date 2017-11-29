@@ -22,37 +22,46 @@
     <div class="teamFighters" *ngFor="let fighter of game.team; index as rank">
       <p class="teamFightersName">{{fighter.name}}</p>
       <img class="teamFightersImg" src={{fighter.imageUrl}} alt="fighter.name">
-      <button class="teamFightersButton" (click)="selectMe(rank)">Select Me !</button>
+      <button class="teamFightersButton" (click)="selectMe(rank)">Equiper</button>
     </div>
   </div>
 
   <div class="selectedFighter">
     <div class="stats">
-      <img src={{game.team[selectedFighter].imageUrl}} alt="game.team[selectedFighter].name">
-      <input type="text" [(ngModel)]="game.team[selectedFighter].name" placeholder="{{game.team[selectedFighter].name}}">
-      <p>Race: {{game.team[selectedFighter].race}}</p>
-      <p>Attaque: {{game.team[selectedFighter].attack}}</p>
-      <p>Défense: {{game.team[selectedFighter].defense}}</p>
-      <p>Vie: {{game.team[selectedFighter].hp}}</p>
-      <p>Vie max: {{game.team[selectedFighter].maxHp}}</p>
-      <p>Victoires: {{game.team[selectedFighter].victory}}</p>
-      <button (click)="healMe()">Soigner (10hp pour 10gp)</button>
+      <div class="selectedFighterImg">
+        <img src={{game.team[selectedFighter].imageUrl}} alt="game.team[selectedFighter].name">
+      </div>
+
+      <div class="selectedFighterStats">
+        <input type="text" [(ngModel)]="game.team[selectedFighter].name" placeholder="{{game.team[selectedFighter].name}}">
+        <p>Race: {{game.team[selectedFighter].race}}</p>
+        <p>Attaque: {{game.team[selectedFighter].attack}}</p>
+        <p>Défense: {{game.team[selectedFighter].defense}}</p>
+        <p>Vie: {{game.team[selectedFighter].hp}}</p>
+        <p>Vie max: {{game.team[selectedFighter].maxHp}}</p>
+        <p>Victoires: {{game.team[selectedFighter].victory}}</p>
+      </div>
+
     </div>
-    <div class="wornWeapon">
+    <div class="wornWeapon selectedFighterStuff">
       <img src={{game.team[selectedFighter].weapon.imageUrl}} alt="game.team[selectedFighter].weapon.name">
-      <p>{{game.team[selectedFighter].weapon.name}}</p>
-      <p>Dégats: {{game.team[selectedFighter].weapon.minDamage}}-{{game.team[selectedFighter].weapon.maxDamage}}</p>
-      <button (click)="dropWeapon()">Poser l'arme</button>
+      <div>
+        <p>{{game.team[selectedFighter].weapon.name}}</p>
+        <p>Dégats: {{game.team[selectedFighter].weapon.minDamage}}-{{game.team[selectedFighter].weapon.maxDamage}}</p>
+        <button (click)="dropWeapon()">Poser l'arme</button>
+      </div>
     </div>
-    <div class="wornArmor">
+    <div class="wornArmor selectedFighterStuff">
       <img src={{game.team[selectedFighter].armor.imageUrl}} alt="game.team[selectedFighter].armor.name">
-      <p>{{game.team[selectedFighter].armor.name}}</p>
-      <p>Protection: {{game.team[selectedFighter].armor.acBonus}}</p>
-      <button (click)="dropArmor()">Oter l'armure</button>
+      <div>
+        <p>{{game.team[selectedFighter].armor.name}}</p>
+        <p>Protection: {{game.team[selectedFighter].armor.acBonus}}</p>
+        <button (click)="dropArmor()">Oter l'armure</button>
+      </div>
     </div>
   </div>
 
-  <div class="teamWeaponList">
+  <div class="teamWeaponList teamList">
     <div class="teamWeapon" *ngFor="let weapon of game.weapons; index as rank">
       <p>{{weapon.name}}</p>
       <img src={{weapon.imageUrl}} alt="weapon.name">
@@ -60,7 +69,7 @@
     </div>
   </div>
 
-  <div class="teamArmorList">
+  <div class="teamArmorList teamList">
     <div class="teamArmor" *ngFor="let armor of game.armors; index as rank">
       <p>{{armor.name}}</p>
       <img src={{armor.imageUrl}} alt="armor.name">
@@ -69,8 +78,14 @@
   </div>
 
   <div class="buttons">
-    <button (click)="goHome()">back</button>
-    <button (click)="goArena()">arene</button>
+    <div class="selectedFighterButton">
+      <button (click)="healMe()">Soigner (10hp pour 10gp)</button>
+    </div>
+    <div class="navButtons">
+      <button (click)="goHome()">Accueil</button>
+      <button (click)="goMarket()">Marché</button>
+      <button (click)="goArena()">Arène</button>
+    </div>
   </div>
 
 </div>

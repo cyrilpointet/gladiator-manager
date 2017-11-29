@@ -1,0 +1,119 @@
+/****** Import external files ******/
+
+@import "reset.scss";
+@import "fontello.scss";
+//@import "animate.scss";
+@import "utilities/initial-variables.sass";
+
+
+@font-face {
+    font-family: 'mainFont';
+    src: url("../../sass/fonts/English.ttf");
+}
+@font-face {
+    font-family: 'mainFontCap';
+    src: url("../../sass/fonts/EnglishMaj.ttf");
+}
+
+/****** Set color variable ******/
+
+$primary: #422b59;
+$secondary: #f5deb3;
+
+/****** import bulma.css modules ******/
+
+@import "utilities/_all";
+@import "elements/button";
+
+
+/****** Calculated variables ******/
+
+// Primary Color
+
+$primary-dark: darken($primary, 20%);
+$primary-light: lighten($primary, 20%);
+
+$primary-opposite: hsl((hue($primary)+180), saturation($primary), lightness($primary));
+$primary-opposite-dark: darken($primary-opposite, 20%);
+$primary-opposite-light: lighten($primary-opposite, 20%);
+
+$primary-invert: findColorInvert($primary);
+$primary-opposite-invert: findColorInvert($primary-opposite);
+
+// Secondary Color
+
+$secondary-dark: darken($secondary, 20%);
+$secondary-light: lighten($secondary, 20%);
+
+$secondary-opposite: hsl((hue($secondary)+180), saturation($secondary), lightness($secondary));
+$secondary-opposite-dark: darken($secondary-opposite, 20%);
+$secondary-opposite-light: lighten($secondary-opposite, 20%);
+
+$secondary-invert: findColorInvert($secondary);
+$secondary-opposite-invert: findColorInvert($secondary-opposite);
+
+
+/****** mixin ******/
+
+@mixin flexInRow {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+}
+
+@mixin flexInColumn {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+@mixin gridCenter {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+@mixin fullBackground($backgroundImage) {
+    background: no-repeat fixed center;
+    background-image: url($backgroundImage);
+    background-size: cover;
+}
+
+@mixin shadowed {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.45);
+}
+
+@mixin shadowedHoverable {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.45);
+    &:hover {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.45);
+    }
+}
+
+/******************* General classes ******************************************/
+
+.is-secondary {
+    background-color: $secondary;
+    color: $secondary-invert;
+}
+
+.is-opposite {
+    background-color: $primary-opposite;
+    color: $primary-opposite-invert;
+}
+
+.boldFont {
+    font-family: 'mainFont', serif; 
+    font-weight: bold;
+}
+
+.capFont {
+    font-family: 'mainFontCap', serif; 
+    font-weight: bold;
+}
+
+.mainFont {
+    font-family: 'mainFont', serif; 
+}

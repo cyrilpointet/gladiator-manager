@@ -1,0 +1,22 @@
+<div class="card animated" [ngClass]="[fighter.classType]" [style.borderColor]="fighter.couleurfond" (click)="clickMeBoard()">
+  <h1 *ngIf="rank!=null">{{fighter.name}}</h1>
+  <h1 *ngIf="rank==null">{{fighter.race}}</h1>
+  
+  <div class="middlePart">
+    <img src={{fighter.imageUrl}} alt="">
+    <div class="hpGauge" [style.height]="hpOnMaxHp" [style.backgroundColor]="hpGaugeColor"></div>
+  </div>
+
+  <div class="char">
+    <p>
+      <i class="icon-sword"></i> {{fighter.attack}}</p>
+    <p>
+      <i class="icon-shield"></i> {{fighter.defense}}</p>
+    <p>
+      <i class="icon-heart"></i> {{fighter.hp}}</p>
+  </div>
+  <div *ngIf="rank==null" class="stuff">
+    <p>{{fighter.weapon.name}}</p>
+    <p>{{fighter.armor.name}}</p>
+  </div>
+</div>

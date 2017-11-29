@@ -1,0 +1,201 @@
+@import '../../sass/style';
+
+.ludus {
+  font-family: 'mainFont', serif;
+  background: url('../../assets/img/marble.jpg');
+  width: 100vw;
+  height: 100vh;
+  @include gridCenter;
+  grid-template-rows: 2fr 3fr 6fr 6fr 2fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "title title" "fighterSelection fighterSelection" "selectedFighter teamWeaponList" "selectedFighter teamArmorList" "buttons buttons"
+}
+
+button {
+  @include shadowed;
+  color: white;
+  border-radius: 0.25rem;
+  background: url('../../assets/img/marbleFlat.jpg');
+}
+
+.title,
+.fighterSelection,
+.selectedFighter,
+.teamWeaponList,
+.teamArmorList,
+.buttons {
+  @include shadowed;
+  box-sizing: border-box;
+  border-radius: 0.5rem;  
+  padding: 1rem;
+}
+
+img {
+  width: 100px
+}
+
+.title {
+  background: url('../../assets/img/leatherBackground.jpg');
+  border: solid rgba(0, 0, 0, 0.25) 0.5rem;
+  box-sizing: border-box;
+  grid-area: title;
+  width: 95%;
+  height: 95%;
+  @include gridCenter;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "msg lvl money";
+  .msg {
+    width: 100%;
+    height: 100%;
+    grid-area: msg;
+    @include flexInColumn;
+    h1 {
+      @extend .capFont;
+      font-size: 2.5rem;
+    }
+    p {
+      @extend .boldFont;
+      font-size: 1.5rem;
+    }
+  }
+  .lvl {
+    width: 100%;
+    height: 100%;
+    grid-area: lvl;
+    @include flexInColumn;
+    @extend .boldFont;
+    p {
+      @extend .boldFont;
+      font-size: 2.5rem;
+    }
+    
+  }
+  .money {
+    width: 100%;
+    height: 100%;
+    grid-area: money;
+    @include flexInColumn;
+    @extend .boldFont;
+    p {
+      @extend .boldFont;
+      font-size: 2.5rem;
+    }
+    
+  }
+
+}
+
+.fighterSelection {
+  background: url('../../assets/img/leatherBackground.jpg');
+  border: solid rgba(0, 0, 0, 0.25) 0.5rem;
+  box-sizing: border-box;
+  grid-area: fighterSelection;
+  width: 95%;
+  height: 95%;
+  @include flexInRow;
+  justify-content: space-around;
+  overflow-x: auto;
+  .teamFighters {
+    @include shadowed;
+    border-radius: 0.5rem;
+    height: 95%;
+    background: url("../../assets/img/card.jpg") no-repeat center;
+    background-size: cover;
+    box-sizing: border-box;
+    border: solid white 0.25rem;
+    padding: 0.25rem;
+    @include gridCenter;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "teamFightersImg teamFightersName" "teamFightersImg teamFightersButton";
+
+    .teamFightersName {
+      grid-area: teamFightersName;
+      @include gridCenter;
+      width: 95%;
+      height: 95%;
+      @extend .capFont;
+      font-size: 1.25rem;
+    }
+    .teamFightersImg {
+      grid-area: teamFightersImg;
+      width:5rem;
+      border-radius: 50%;
+    }
+    .teamFightersButton {
+      grid-area: teamFightersButton;
+      width: 95%;
+      height: 95%;
+    }
+  }
+}
+
+.selectedFighter {
+  background: url('../../assets/img/leatherBackground.jpg');
+  border: solid rgba(0, 0, 0, 0.25) 0.5rem;
+  box-sizing: border-box;
+  grid-area: selectedFighter;
+  width: 95%;
+  height: 95%;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "stats wornWeapon" "stats wornArmor";
+  .stats {
+    grid-area: stats;
+    width: 100%;
+    height: 100%
+  }
+  .wornWeapon {
+    grid-area: wornWeapon;
+    width: 100%;
+    height: 100%
+  }
+  .wornArmor {
+    grid-area: wornArmor;
+    width: 100%;
+    height: 100%
+  }
+}
+
+.teamWeaponList {
+  background: url('../../assets/img/leatherBackground.jpg');
+  border: solid rgba(0, 0, 0, 0.25) 0.5rem;
+  box-sizing: border-box;
+  grid-area: teamWeaponList;
+  width: 95%;
+  height: 95%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around
+}
+
+.teamArmorList {
+  background: url('../../assets/img/leatherBackground.jpg');
+  border: solid rgba(0, 0, 0, 0.25) 0.5rem;
+  box-sizing: border-box;
+  grid-area: teamArmorList;
+  width: 95%;
+  height: 95%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around
+}
+
+.buttons {
+  background: url('../../assets/img/leatherBackground.jpg');
+  border: solid rgba(0, 0, 0, 0.25) 0.5rem;
+  box-sizing: border-box;
+  grid-area: buttons;
+  width: 95%;
+  height: 95%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around
+}

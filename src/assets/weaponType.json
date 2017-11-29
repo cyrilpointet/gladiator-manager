@@ -1,0 +1,58 @@
+{
+    "unArmed":{
+        "name":"cestes",
+        "minDamage": 1,
+        "maxDamage": 15,
+        "image":"cestus.jpg",
+        "market": false
+      },
+      "dagger":{
+        "name":"dague",
+        "minDamage": 5,
+        "maxDamage": 20,
+        "image":"dagger.jpg",
+        "market": true
+      },
+      "shortSword":{
+        "name":"épée courte",
+        "minDamage": 5,
+        "maxDamage": 30,
+        "image":"shortsword.jpg",
+        "market": true
+      },
+      "axe":{
+        "name":"hache",
+        "minDamage": 10,
+        "maxDamage": 35,
+        "image":"axe.jpg",
+        "market": true
+      },
+      "warHammer":{
+        "name":"marteau lourd",
+        "minDamage": 20,
+        "maxDamage": 60,
+        "image":"warhammer.jpg",
+        "market": true
+      },
+      "longBow":{
+        "name":"arc long",
+        "minDamage": 25,
+        "maxDamage": 60,
+        "image":"longbow.jpg",
+        "market": true
+      },
+      "greatSword":{
+        "name":"espadon",
+        "minDamage": 25,
+        "maxDamage": 65,
+        "image":"twoHandedSword.jpg",
+        "market": true
+      },
+      "claw01":{
+        "name":"griffes",
+        "minDamage": 15,
+        "maxDamage": 50,
+        "image":"claw01.jpg",
+        "market": false
+      }
+}

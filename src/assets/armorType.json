@@ -1,0 +1,44 @@
+{
+    "noArmor":{
+        "name":"tunique",
+        "acBonus":0,
+        "image":"tunic.jpg",
+        "value":0,
+        "market": false
+      },
+      "leather":{
+        "name":"cuir clouté",
+        "acBonus":15,
+        "image":"leatherArmor.jpg",
+        "value":150,
+        "market": true
+      },
+      "scalemail":{
+        "name":"armure d'écailles",
+        "acBonus":20,
+        "image":"scaleArmor.jpg",
+        "value":200,
+        "market": true
+      },
+      "chainmail":{
+        "name":"cotte de maille",
+        "acBonus":25,
+        "image":"chainmail.jpg",
+        "value":250,
+        "market": true
+      },
+      "plateArmor":{
+        "name":"harnois",
+        "acBonus":35,
+        "image":"plateRamor.jpg",
+        "value":350,
+        "market": true
+      },
+      "leatherSkin":{
+        "name":"peau",
+        "acBonus":15,
+        "image":"leatherSkin.jpg",
+        "value":150,
+        "market": false
+      }
+}

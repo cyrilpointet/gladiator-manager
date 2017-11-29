@@ -1,0 +1,92 @@
+{
+    "goblin": {
+      "name": "goblin",
+      "race": "goblin",
+      "hp": 20,
+      "image": "goblin.jpg",
+      "attack": -20,
+      "defense": 0,
+      "weaponList": ["unArmed", "dagger"],
+      "armorList": ["noArmor", "leather"]
+    },
+    "orc": {
+      "name": "orc",
+      "race": "orc",
+      "hp": 40,
+      "image": "orc.jpg",
+      "attack": 25,
+      "defense": 0,
+      "weaponList": ["dagger", "shortSword"],
+      "armorList": ["leather", "chainmail"]
+    },
+    "dwarf": {
+      "name": "nain",
+      "race": "nain",
+      "hp": 40,
+      "image": "dwarf.jpg",
+      "attack": 15,
+      "defense": 20,
+      "weaponList": ["dagger", "axe", "warHammer"],
+      "armorList": ["leather", "scalemail", "chainmail"]
+    },
+    "elf": {
+      "name": "elfe",
+      "race": "elfe",
+      "hp": 30,
+      "image": "elf.jpg",
+      "attack": 25,
+      "defense": -10,
+      "weaponList": ["dagger", "longBow", "longBow"],
+      "armorList": ["leather", "noArmor"]
+    },
+    "barbarian": {
+      "name": "barbare",
+      "race": "barbare",
+      "hp": 45,
+      "image": "barbarian.jpg",
+      "attack": 25,
+      "defense": 0,
+      "weaponList": ["dagger", "greatSword", "warHammer"],
+      "armorList": ["leather", "scalemail"]
+    },
+    "troll": {
+      "name": "troll",
+      "race": "troll",
+      "hp": 80,
+      "image": "troll.jpg",
+      "attack": 45,
+      "defense": 30,
+      "weaponList": ["warHammer"],
+      "armorList": ["leather", "noArmor"]
+    },
+    "drow": {
+      "name": "drow",
+      "race": "drow",
+      "hp": 35,
+      "image": "drow.jpg",
+      "attack": 35,
+      "defense": 5,
+      "weaponList": ["shortSword", "longBow", "longBow"],
+      "armorList": ["leather", "leather", "scalemail"]
+    },
+    "centaur": {
+      "name": "centaure",
+      "race": "centaure",
+      "hp": 50,
+      "image": "centaur.jpg",
+      "attack": 35,
+      "defense": 10,
+      "weaponList": ["shortSword", "axe", "longBow", "shortSword"],
+      "armorList": ["leather", "leather", "noArmor"]
+    },
+    "werewolf": {
+      "name": "Lycan",
+      "race": "Lycan",
+      "hp": 70,
+      "image": "werewolf.jpg",
+      "attack": 40,
+      "defense": 15,
+      "weaponList": ["claw01"],
+      "armorList": ["leatherSkin"]
+    }
+  }

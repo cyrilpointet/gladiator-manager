@@ -1,0 +1,35 @@
+<main id="gameboard">
+  <div class="arena">
+    
+    <div class="team">
+      <app-fighter-board *ngFor="let fighter of game.team; index as rank" [fighter]="fighter" [rank]="rank" [activeFighterIndex]="activeFighterIndex"
+        (clickOnFighter)="clickOnTeammate($event)"></app-fighter-board>
+    </div>
+  
+    <div class="opponents">
+      <app-fighter-board *ngFor="let fighter of game.counterTeam" [fighter]="fighter" (clickOnFighter)="clickOnOpponent($event)"></app-fighter-board>
+    </div>
+
+  </div>
+
+  <div class="playerBoard">
+      <app-selected-fighter-board [fighter]="game.team[activeFighterIndex]"></app-selected-fighter-board>
+
+    <div class="stuff">
+      <app-item *ngFor="let item of game.items; index as rank" [item]="item" [rank]="rank" (clickOnStuff)="clickOnStuff($event)"></app-item>
+    </div>
+
+    <div (click)="passTurn()" class="passturn">
+      <p>next turn</p>
+    </div>
+
+    <div class="fullscreen" (click)="goBack()" >
+        <p>go back</p>
+    </div>
+  </div>
+
+  <div class="message">
+    <p>{{message}}</p>
+  </div>
+
+</main>

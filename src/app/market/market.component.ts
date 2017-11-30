@@ -149,6 +149,10 @@ export class MarketComponent implements OnInit {
       this.game.money -= fighter.value;
       this.availableFighters.splice(rank, 1);
       this.game.team.push(fighter);
+      let sound = document.getElementById('buy');
+      sound.pause();
+      sound.currentTime = 0;
+      sound.play();
     }
   }
 
@@ -161,6 +165,10 @@ export class MarketComponent implements OnInit {
     } else {
       this.game.weapons.push(buyedWeapon);
       this.game.money -= buyedWeapon.value;
+      let sound = document.getElementById('buy');
+      sound.pause();
+      sound.currentTime = 0;
+      sound.play();
     }
   }
   buyArmor(armor: Armor) {
@@ -172,6 +180,10 @@ export class MarketComponent implements OnInit {
     } else {
       this.game.armors.push(buyedArmor);
       this.game.money -= buyedArmor.value;
+      let sound = document.getElementById('buy');
+      sound.pause();
+      sound.currentTime = 0;
+      sound.play();
     }
   }
 
@@ -184,6 +196,10 @@ export class MarketComponent implements OnInit {
     } else {
       this.game.items.push(buyedItem);
       this.game.money -= buyedItem.value;
+      let sound = document.getElementById('buy');
+      sound.pause();
+      sound.currentTime = 0;
+      sound.play();
     }
   }
 
@@ -191,16 +207,28 @@ export class MarketComponent implements OnInit {
     this.game.money += this.game.team[rank].value;
     this.availableFighters.push(this.game.team[rank]);
     this.game.team.splice(rank, 1);
+    let sound = document.getElementById('buy');
+    sound.pause();
+    sound.currentTime = 0;
+    sound.play();
   }
 
   sellWeapon(rank) {
     this.game.money += this.game.weapons[rank].value;
     this.game.weapons.splice(rank, 1);
+    let sound = document.getElementById('buy');
+    sound.pause();
+    sound.currentTime = 0;
+    sound.play();
   }
 
   sellArmor(rank) {
     this.game.money += this.game.armors[rank].value;
     this.game.armors.splice(rank, 1);
+    let sound = document.getElementById('buy');
+    sound.pause();
+    sound.currentTime = 0;
+    sound.play();
   }
 
   goBack() {

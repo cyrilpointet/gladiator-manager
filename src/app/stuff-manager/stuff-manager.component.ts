@@ -25,30 +25,30 @@ import { forEach } from '@angular/router/src/utils/collection';
   animations: [
     trigger('toLeft', [
       transition('void => *', [
-        animate('450ms',keyframes([
-          style({transform: 'translateX(-100vw)',offset: 0}),
-          style({transform: 'translateX(5vw)',offset: 0.8}),
-          style({transform: 'translateX(0)',offset: 1})
+        animate('450ms', keyframes([
+          style({ transform: 'translateX(-100vw)', offset: 0 }),
+          style({ transform: 'translateX(5vw)', offset: 0.8 }),
+          style({ transform: 'translateX(0)', offset: 1 })
         ]))
       ]),
       transition('* => void', [
         animate('300ms', keyframes([
-          style({transform: 'translateX(0)',offset: 0}),
-          style({transform: 'translateX(5vw)',offset: 0.2}),
-          style({transform: 'translateX(-100vw)',offset: 1})
+          style({ transform: 'translateX(0)', offset: 0 }),
+          style({ transform: 'translateX(5vw)', offset: 0.2 }),
+          style({ transform: 'translateX(-100vw)', offset: 1 })
         ]))
       ])
     ]),
-    trigger('selectedFighterAnim',[
-      transition('*=>*',[
-        animate('250ms',keyframes([
-          style({transform: 'scale3d(1,1,1)',offset: 0}),
-          style({transform: 'scale3d(0,1,1)',offset: 0.5}),
-          style({transform: 'scale3d(1,1,1)',offset: 1})
+    trigger('selectedFighterAnim', [
+      transition('*=>*', [
+        animate('250ms', keyframes([
+          style({ transform: 'scale3d(1,1,1)', offset: 0 }),
+          style({ transform: 'scale3d(0,1,1)', offset: 0.5 }),
+          style({ transform: 'scale3d(1,1,1)', offset: 1 })
         ]))
       ])
     ]),
-    trigger('animState',[
+    trigger('animState', [
       state('inactive', style({
         transform: 'scale(1)',
         border: 'solid rgba(255, 255, 255, 0.25) 0.25rem'
@@ -57,7 +57,7 @@ import { forEach } from '@angular/router/src/utils/collection';
         transform: 'scale(1.2)',
         border: 'solid rgba(5, 255, 118, 0.25) 0.25rem'
       })),
-      transition('inactive <=> stuffSelected', animate('250ms'))  
+      transition('inactive <=> stuffSelected', animate('250ms'))
     ])
   ]
 })
@@ -68,15 +68,15 @@ export class StuffManagerComponent implements OnInit {
     private router: Router
   ) { }
 
-  selectedFighter: number=0;
-  selectedFighterAnim: string='';
+  selectedFighter: number = 0;
+  selectedFighterAnim: string = '';
 
   ngOnInit() {
     console.log('coucou stuff');
-    this.game.team[0].animState='stuffSelected';
+    this.game.team[0].animState = 'stuffSelected';
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.game.team.forEach(fighter => {
       fighter.animState = 'inactive';
     });
@@ -84,7 +84,7 @@ export class StuffManagerComponent implements OnInit {
 
   selectMe(rank) {
     this.selectedFighter = rank;
-    this.selectedFighterAnim = ''+this.selectedFighter;
+    this.selectedFighterAnim = '' + this.selectedFighter;
     this.game.team.forEach(fighter => {
       fighter.animState = 'inactive';
     });
@@ -110,25 +110,39 @@ export class StuffManagerComponent implements OnInit {
   }
 
   takeWeapon(rank) {
-    if (this.dropWeapon() || this.game.team[this.selectedFighter].weapon.type=='unArmed' ) {
+    if (this.dropWeapon() || this.game.team[this.selectedFighter].weapon.type == 'unArmed') {
       this.game.team[this.selectedFighter].weapon = this.game.weapons[rank];
-    this.game.weapons.splice(rank, 1);
-    }    
+      this.game.weapons.splice(rank, 1);
+      let sound = document.getElementById('armor');
+      sound.pause();
+      sound.currentTime = 0;
+      sound.play();
+    }
   }
 
   takeArmor(rank) {
-    if (this.dropArmor() ||  this.game.team[this.selectedFighter].armor.type=='noArmor') {
+    if (this.dropArmor() || this.game.team[this.selectedFighter].armor.type == 'noArmor') {
       this.game.team[this.selectedFighter].armor = this.game.armors[rank];
       this.game.armors.splice(rank, 1);
+      let sound = document.getElementById('armor');
+      sound.pause();
+      sound.currentTime = 0;
+      sound.play();
     }
   }
 
   healMe() {
-    this.game.team[this.selectedFighter].hp += 10;
-    if (this.game.team[this.selectedFighter].hp > this.game.team[this.selectedFighter].maxHp) {
-      this.game.team[this.selectedFighter].hp = this.game.team[this.selectedFighter].maxHp
+    if (this.game.team[this.selectedFighter].hp < this.game.team[this.selectedFighter].maxHp) {
+      this.game.team[this.selectedFighter].hp += 10;
+      if (this.game.team[this.selectedFighter].hp > this.game.team[this.selectedFighter].maxHp) {
+        this.game.team[this.selectedFighter].hp = this.game.team[this.selectedFighter].maxHp
+      }
+      this.game.money -= 10;
+      let sound = document.getElementById('buy');
+      sound.pause();
+      sound.currentTime = 0;
+      sound.play();
     }
-    this.game.money -= 10;
   }
 
   goHome() {

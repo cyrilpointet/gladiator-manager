@@ -53,7 +53,7 @@ export class GameService {
   // --------------------------- player variables ---------------------------------------
   //-------------------------------------------------------------------------------------
 
-  
+  isInit:boolean=false;
   team: Array<Fighter> = [];
   items: Array<Item> = [];
   weapons: Array<Weapon> = [];

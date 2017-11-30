@@ -63,6 +63,7 @@ export class Fighter {
     victory: number=0;
 
     // variables for animating
+    animState:string='inactive';
     classType: string = 'fadeInDownBig';
     couleurfond: string = 'white';
 

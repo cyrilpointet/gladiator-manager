@@ -1,6 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  keyframes
+} from '@angular/animations';
 
 import { GameService } from './../game.service';
 import { Fighter } from './../fighter';
@@ -12,7 +20,41 @@ import { forEach } from '@angular/router/src/utils/collection';
 @Component({
   selector: 'app-market',
   templateUrl: './market.component.html',
-  styleUrls: ['./market.component.scss']
+  styleUrls: ['./market.component.scss'],
+  animations: [
+    trigger('toRight', [
+      transition('void => *', [
+        animate('450ms',keyframes([
+          style({transform: 'translateX(100vw)',offset: 0}),
+          style({transform: 'translateX(-5vw)',offset: 0.8}),
+          style({transform: 'translateX(0)',offset: 1})
+        ]))
+      ]),
+      transition('* => void', [
+        animate('300ms', keyframes([
+          style({transform: 'translateX(0)',offset: 0}),
+          style({transform: 'translateX(-5vw)',offset: 0.2}),
+          style({transform: 'translateX(100vw)',offset: 1})
+        ]))
+      ])
+    ]),
+    trigger('toLeft', [
+      transition('void => *', [
+        animate('450ms',keyframes([
+          style({transform: 'translateX(-100vw)',offset: 0}),
+          style({transform: 'translateX(5vw)',offset: 0.8}),
+          style({transform: 'translateX(0)',offset: 1})
+        ]))
+      ]),
+      transition('* => void', [
+        animate('300ms', keyframes([
+          style({transform: 'translateX(0)',offset: 0}),
+          style({transform: 'translateX(5vw)',offset: 0.2}),
+          style({transform: 'translateX(-100vw)',offset: 1})
+        ]))
+      ])
+    ])
+  ]
 })
 export class MarketComponent implements OnInit {
 

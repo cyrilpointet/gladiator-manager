@@ -1,17 +1,65 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  keyframes
+} from '@angular/animations';
 
 
 import { GameService } from './../game.service';
 import { Fighter } from './../fighter';
 import { Weapon } from './../weapon';
 import { Armor } from './../armor';
+import { stringify } from '@angular/core/src/util';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-stuff-manager',
   templateUrl: './stuff-manager.component.html',
-  styleUrls: ['./stuff-manager.component.scss']
+  styleUrls: ['./stuff-manager.component.scss'],
+  animations: [
+    trigger('toLeft', [
+      transition('void => *', [
+        animate('450ms',keyframes([
+          style({transform: 'translateX(-100vw)',offset: 0}),
+          style({transform: 'translateX(5vw)',offset: 0.8}),
+          style({transform: 'translateX(0)',offset: 1})
+        ]))
+      ]),
+      transition('* => void', [
+        animate('300ms', keyframes([
+          style({transform: 'translateX(0)',offset: 0}),
+          style({transform: 'translateX(5vw)',offset: 0.2}),
+          style({transform: 'translateX(-100vw)',offset: 1})
+        ]))
+      ])
+    ]),
+    trigger('selectedFighterAnim',[
+      transition('*=>*',[
+        animate('250ms',keyframes([
+          style({transform: 'scale3d(1,1,1)',offset: 0}),
+          style({transform: 'scale3d(0,1,1)',offset: 0.5}),
+          style({transform: 'scale3d(1,1,1)',offset: 1})
+        ]))
+      ])
+    ]),
+    trigger('animState',[
+      state('inactive', style({
+        transform: 'scale(1)',
+        border: 'solid rgba(255, 255, 255, 0.25) 0.25rem'
+      })),
+      state('stuffSelected', style({
+        transform: 'scale(1.2)',
+        border: 'solid rgba(5, 255, 118, 0.25) 0.25rem'
+      })),
+      transition('inactive <=> stuffSelected', animate('250ms'))  
+    ])
+  ]
 })
 export class StuffManagerComponent implements OnInit {
 
@@ -20,17 +68,27 @@ export class StuffManagerComponent implements OnInit {
     private router: Router
   ) { }
 
-  selectedFighter: number;
+  selectedFighter: number=0;
+  selectedFighterAnim: string='';
 
   ngOnInit() {
     console.log('coucou stuff');
+    this.game.team[0].animState='stuffSelected';
+  }
 
-    this.selectedFighter = 0;
-
+  ngOnDestroy(){
+    this.game.team.forEach(fighter => {
+      fighter.animState = 'inactive';
+    });
   }
 
   selectMe(rank) {
     this.selectedFighter = rank;
+    this.selectedFighterAnim = ''+this.selectedFighter;
+    this.game.team.forEach(fighter => {
+      fighter.animState = 'inactive';
+    });
+    this.game.team[rank].animState = 'stuffSelected';
   }
 
   dropWeapon() {

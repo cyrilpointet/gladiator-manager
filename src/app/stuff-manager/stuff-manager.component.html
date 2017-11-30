@@ -19,10 +19,9 @@
   </div>
 
   <div class="fighterSelection">
-    <div class="teamFighters" [@animState]="fighter.animState" *ngFor="let fighter of game.team; index as rank">
+    <div class="teamFighters" (click)="selectMe(rank)" [@animState]="fighter.animState" *ngFor="let fighter of game.team; index as rank">
       <p class="teamFightersName">{{fighter.name}}</p>
       <img class="teamFightersImg" src={{fighter.imageUrl}} alt="fighter.name">
-      <button *ngIf="rank!=selectedFighter" class="teamFightersButton" (click)="selectMe(rank)">Equiper</button>
     </div>
   </div>
 

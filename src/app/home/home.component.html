@@ -1,8 +1,9 @@
 <main class="general-primary">
   <div class="welcome general-primary">
     <p>Bienvenue aux gladiateurs</p>
-    <a *ngIf="game.team.length > 0" (click)="goArena()" >Entrez dans l'arêne</a>
-    <a *ngIf="game.fighterTypeList" (click)="goMarket()" >Place du Marché</a>
+    <a *ngIf="!game.isNoob" (click)="goMarket()" >Place du Marché</a>
+    <a *ngIf="game.isNoob && game.team.length <1" (click)="goTutoMarket()" >Engagez votre premier gladiateur</a>
+    <a *ngIf="game.team.length > 0 && !game.isNoob" (click)="goArena()" >Entrez dans l'arêne</a>
     <a *ngIf="game.team.length > 0" (click)="goStuff()" >Préparation des gladiateurs</a>
   </div>
 </main>

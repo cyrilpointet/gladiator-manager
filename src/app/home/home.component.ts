@@ -16,11 +16,11 @@ export class HomeComponent {
     private game: GameService,
   ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     console.log('coucou home');
   }
 
-  goArena(){
+  goArena() {
     this.router.navigate(['arena']);
   }
   goMarket() {
@@ -29,5 +29,7 @@ export class HomeComponent {
   goStuff() {
     this.router.navigate(['stuff']);
   }
-
+  goTutoMarket() {
+    this.router.navigate(['tutomarket']);
+  }
 }

@@ -54,6 +54,7 @@ export class GameService {
   //-------------------------------------------------------------------------------------
 
   isInit:boolean=false;
+  isNoob=true;
   team: Array<Fighter> = [];
   items: Array<Item> = [];
   weapons: Array<Weapon> = [];

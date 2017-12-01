@@ -73,6 +73,7 @@ export class StuffManagerComponent implements OnInit {
 
   ngOnInit() {
     console.log('coucou stuff');
+    this.game.isNoob=false;
     this.game.team[0].animState = 'stuffSelected';
   }
 
@@ -113,7 +114,7 @@ export class StuffManagerComponent implements OnInit {
     if (this.dropWeapon() || this.game.team[this.selectedFighter].weapon.type == 'unArmed') {
       this.game.team[this.selectedFighter].weapon = this.game.weapons[rank];
       this.game.weapons.splice(rank, 1);
-      let sound = document.getElementById('armor');
+      let sound:any = document.getElementById('armor');
       sound.pause();
       sound.currentTime = 0;
       sound.play();
@@ -124,7 +125,7 @@ export class StuffManagerComponent implements OnInit {
     if (this.dropArmor() || this.game.team[this.selectedFighter].armor.type == 'noArmor') {
       this.game.team[this.selectedFighter].armor = this.game.armors[rank];
       this.game.armors.splice(rank, 1);
-      let sound = document.getElementById('armor');
+      let sound:any = document.getElementById('armor');
       sound.pause();
       sound.currentTime = 0;
       sound.play();
@@ -138,7 +139,7 @@ export class StuffManagerComponent implements OnInit {
         this.game.team[this.selectedFighter].hp = this.game.team[this.selectedFighter].maxHp
       }
       this.game.money -= 10;
-      let sound = document.getElementById('buy');
+      let sound:any = document.getElementById('buy');
       sound.pause();
       sound.currentTime = 0;
       sound.play();

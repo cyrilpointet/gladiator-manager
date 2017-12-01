@@ -16,6 +16,7 @@ import { GameService } from './game.service';
 import { HomeComponent } from './home/home.component';
 import { MarketComponent } from './market/market.component';
 import { StuffManagerComponent } from './stuff-manager/stuff-manager.component';
+import { TutoMarketComponent } from './tuto-market/tuto-market.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { StuffManagerComponent } from './stuff-manager/stuff-manager.component';
     ArenaComponent,
     HomeComponent,
     MarketComponent,
-    StuffManagerComponent
+    StuffManagerComponent,
+    TutoMarketComponent
   ],
   imports: [
     BrowserModule,

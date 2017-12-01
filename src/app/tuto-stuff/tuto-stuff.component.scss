@@ -1,0 +1,30 @@
+@import '../../sass/style';
+
+.background {
+    @include gridCenter;
+    background: url("../../assets/img/arena.jpg") no-repeat fixed;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+}
+
+.text {
+    @include flexInColumn;
+    justify-content: space-around;
+    @extend .capFont;
+    background: url('../../assets/img/leatherBackground.jpg');
+    border: solid rgba(0, 0, 0, 0.25) 0.5rem;
+    box-sizing: border-box;
+    padding: 2rem;
+    border-radius: 2rem;
+    h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+    button {
+        @include shadowed;
+        padding: 1rem;
+        background: url('../../assets/img/marbleFlat.jpg');
+        color: white;
+    }
+}

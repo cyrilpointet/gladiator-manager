@@ -32,4 +32,13 @@ export class HomeComponent {
   goTutoMarket() {
     this.router.navigate(['tutomarket']);
   }
+  goTutoStuff() {
+    this.router.navigate(['tutoStuff']);
+  }
+  save(){
+    this.game.savePlayer();
+  }
+  load(){
+    this.game.loadPlayer(this.game.name);
+  }
 }

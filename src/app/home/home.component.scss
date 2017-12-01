@@ -5,7 +5,7 @@ main {
     font-family: 'mainFont', serif; 
     width: 100vw;
     height: 100vh;
-    background-image: url("../../assets/img/arena.jpg");
+    background-image: url("../../assets/img/gladiator.jpg");
     background-size: cover;
     @include gridCenter;
 }
@@ -13,12 +13,18 @@ main {
 .welcome {
     p, a {
         display: block;
-        color: $secondary;
+        color: black;
         font-size: 2rem;
     }
+    cursor:default;
+    h1 {
+        @extend .capFont;
+        font-size: 2.5rem;
+    }
 
-    background-color: $primary;
-
+    background: url('../../assets/img/leatherBackground.jpg');
+    border: solid rgba(0, 0, 0, 0.25) 0.5rem;
+    box-sizing: border-box;
     width: 50%;
     height: 40%;
     display: flex;
@@ -30,5 +36,13 @@ main {
 }
 
 a{
+    @include shadowedHoverable;
+    transition: 0.2s;
     cursor: pointer;
+    background: url("../../assets/img/card.jpg") no-repeat center;
+    background-size: cover;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: solid rgba(0, 0, 0, 0.25) 0.25rem;
+    box-sizing: border-box;
 }

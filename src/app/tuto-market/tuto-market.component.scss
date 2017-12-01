@@ -21,4 +21,10 @@
         font-size: 2rem;
         text-align: center;
     }
+    button {
+        @include shadowed;        
+        padding: 1rem;
+        background: url('../../assets/img/marbleFlat.jpg');
+        color: white;
+    }
 }

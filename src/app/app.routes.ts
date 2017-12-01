@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { MarketComponent } from './market/market.component';
 import { StuffManagerComponent } from './stuff-manager/stuff-manager.component';
 import { TutoMarketComponent } from './tuto-market/tuto-market.component';
+import { TutoStuffComponent } from './tuto-stuff/tuto-stuff.component';
 
 
 
@@ -13,5 +14,6 @@ export const ROUTES: Routes = [
   { path: 'arena', component: ArenaComponent },
   { path: 'market', component: MarketComponent },
   { path: 'stuff', component: StuffManagerComponent },
-  { path: 'tutomarket', component: TutoMarketComponent }
+  { path: 'tutomarket', component: TutoMarketComponent },
+  { path: 'tutoStuff', component: TutoStuffComponent }
 ];

@@ -173,14 +173,35 @@ export class GameService {
   }
 
   loadPlayer(name) {
-    let fileName=name+'.txt';
-    let request:string='filename='+fileName;
+    let fileName = 'filename=' + name + '.txt';
+    fileName='filename=Toto.txt';
 
-    this.http.post('./loadPlayer.php',request)
-    .subscribe(response => {
-      console.log(response);
-      console.log(this);
-    });
+    // send player-string to server
+    ajaxPost('./loadPlayer.php', fileName, callback);
+
+    // ajax function
+    function ajaxPost(url, datas, callback) {
+      var req = new XMLHttpRequest();
+      req.open("POST", url);
+      req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      req.send(datas);
+      req.addEventListener("load", function () {
+        if (req.status >= 200 && req.status < 400) {
+          // Appelle la fonction callback en lui passant la réponse de la requête
+          callback(req.responseText);
+        } else {
+          console.error(req.status + " " + req.statusText + " " + url);
+        }
+      });
+      req.addEventListener("error", function () {
+        console.error("Erreur réseau avec l'URL " + url);
+      });
+    }
+
+    // callback
+    function callback(reponse) {
+      console.log(reponse);
+    }
   }
 }
 

@@ -35,10 +35,14 @@ export class HomeComponent {
   goTutoStuff() {
     this.router.navigate(['tutoStuff']);
   }
+  /*
   save(){
-    this.game.savePlayer();
+    this.router.navigate(['login']);
+//    this.game.savePlayer();
   }
+  */
   load(){
-    this.game.loadPlayer(this.game.name);
+    this.router.navigate(['login']);
+//    this.game.loadPlayer(this.game.name);
   }
 }

@@ -6,7 +6,6 @@
     <a *ngIf="game.isNoob && game.team.length <1" (click)="goTutoMarket()" >Engagez votre premier gladiateur</a>
     <a *ngIf="game.team.length > 0 && game.isNoob" (click)="goTutoStuff()" >Découvrez le Ludus</a>
     <a *ngIf="game.team.length > 0 && !game.isNoob" (click)="goStuff()" >Aller au Ludus</a>
-    <a (click)="save()" >Sauvegarder</a>
-    <a (click)="load()" >Charger</a>
+    <a (click)="load()" >Login</a>
   </div>
 </main>

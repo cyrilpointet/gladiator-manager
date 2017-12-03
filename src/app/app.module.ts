@@ -18,6 +18,7 @@ import { MarketComponent } from './market/market.component';
 import { StuffManagerComponent } from './stuff-manager/stuff-manager.component';
 import { TutoMarketComponent } from './tuto-market/tuto-market.component';
 import { TutoStuffComponent } from './tuto-stuff/tuto-stuff.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { TutoStuffComponent } from './tuto-stuff/tuto-stuff.component';
     MarketComponent,
     StuffManagerComponent,
     TutoMarketComponent,
-    TutoStuffComponent
+    TutoStuffComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@
 
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { Item } from './item';
 import { Fighter } from './fighter';
@@ -21,7 +22,8 @@ import { parse } from 'url';
 @Injectable()
 export class GameService {
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   //-------------------------------------------------------------------------------------
@@ -32,6 +34,8 @@ export class GameService {
   weaponTypeList: object;
   armorTypeList: object;
   player: Player;
+  message:string='ok';
+  password:string='s3cr3t';
 
   itemTypeList: object = {
     cure: {
@@ -138,11 +142,11 @@ export class GameService {
       this.items,
       this.weapons,
       this.armors,
-      this.money
+      this.money,
     );
 
     // convert player into string
-    let playerSaved = 'player=' + JSON.stringify(this.player);
+    let playerSaved = 'player=' + JSON.stringify(this.player)+'&password='+this.password;
 
     // send player as string to server
     let req = new XMLHttpRequest();
@@ -164,16 +168,17 @@ export class GameService {
 
   }
 
-  loadPlayer(name) {
+  loadPlayer(name,password) {
     let fileName = 'filename=' + name + '.txt';
+    let loadRequest= 'name='+name+'&password='+password;
 
-    // send save filename to server
+    // send save loadRequest to server
     let req = new XMLHttpRequest();
     let gameservice = this;
 
     req.open("POST", './loadPlayer.php');
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    req.send(fileName);
+    req.send(loadRequest);
     req.addEventListener("load", function () {
       if (req.status >= 200 && req.status < 400) {
         gameservice.callbackload(req.responseText);
@@ -190,13 +195,23 @@ export class GameService {
   /* Ajax callabck from savePlayer() */
   /***********************************/
   callbackSave(reponse) {
+    if (reponse=='error') {
+      this.message='erreur save';
+      return
+    }
     console.log('Saved: ' + reponse);
+
+    this.router.navigate(['']);
   }
 
   /***********************************/
   /* Ajax callabck from loadPlayer() */
   /***********************************/
   callbackload(reponse) {
+    if (reponse=='error') {
+      this.message='erreur load';
+      return
+    }
     // Convert loaded string from API into object
     let loadedPLayer = JSON.parse(reponse);
 
@@ -248,6 +263,8 @@ export class GameService {
         this.armors.push(loadedArmor);
       }
     }
+
+    this.router.navigate(['']);
   }
 }
 

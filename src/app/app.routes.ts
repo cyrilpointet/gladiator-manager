@@ -6,6 +6,7 @@ import { MarketComponent } from './market/market.component';
 import { StuffManagerComponent } from './stuff-manager/stuff-manager.component';
 import { TutoMarketComponent } from './tuto-market/tuto-market.component';
 import { TutoStuffComponent } from './tuto-stuff/tuto-stuff.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 
 
@@ -15,5 +16,6 @@ export const ROUTES: Routes = [
   { path: 'market', component: MarketComponent },
   { path: 'stuff', component: StuffManagerComponent },
   { path: 'tutomarket', component: TutoMarketComponent },
-  { path: 'tutoStuff', component: TutoStuffComponent }
+  { path: 'tutoStuff', component: TutoStuffComponent },
+  { path: 'login', component: LoginPageComponent }
 ];

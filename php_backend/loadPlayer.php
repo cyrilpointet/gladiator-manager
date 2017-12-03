@@ -1,6 +1,9 @@
 <?php 
 // récupère la valeur 'datas' de l'array $_POST
-$fileName =$_POST['filename'];
+$name =$_POST['name'];
+$password=$_POST['password'];
+$fileName=$name.$password.".txt";
+
 
 $monfichier = fopen($fileName, 'r+');
 

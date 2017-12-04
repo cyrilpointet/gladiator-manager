@@ -16,10 +16,10 @@ export class LoginPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('coucou save');
+    console.log('coucou login');
   }
 
-  save(){
-    this.game.savePlayer();
+  login(){
+    this.game.login();
   }
 }

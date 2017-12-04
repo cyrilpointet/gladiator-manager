@@ -33,9 +33,8 @@ export class GameService {
   fighterTypeList: object;
   weaponTypeList: object;
   armorTypeList: object;
-  player: Player;
-  message:string='ok';
-  password:string='s3cr3t';
+  message: string = 'ok';
+  password: string = 's3cr3t';
 
   itemTypeList: object = {
     cure: {
@@ -133,31 +132,32 @@ export class GameService {
   // ---------------------------- Save and Load Methods ---------------------------------
   //-------------------------------------------------------------------------------------
 
-  savePlayer() {
+  login() {
     // create Player object
-    this.player = new Player(
-      this.name,
-      this.isNoob,
-      this.team,
-      this.items,
-      this.weapons,
-      this.armors,
-      this.money,
-    );
+    let player = {
+      name: this.name,
+      password: this.password,
+      isNoob: this.isNoob,
+      team: this.team,
+      items: this.items,
+      weapons: this.weapons,
+      armors: this.armors,
+      money: this.money
+    };
 
     // convert player into string
-    let playerSaved ='name='+this.name+ '&player=' + JSON.stringify(this.player)+'&password='+this.password;
+    let playerSaved = 'saves='+JSON.stringify(player);
 
     // send player as string to server
     let req = new XMLHttpRequest();
     let gameservice = this;
 
-    req.open("POST", './savePlayer.php');
+    req.open("POST", './login.php');
     req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     req.send(playerSaved);
     req.addEventListener("load", function () {
       if (req.status >= 200 && req.status < 400) {
-        gameservice.callbackload(req.responseText);
+        gameservice.callbackLogin(req.responseText);
       } else {
         console.error(req.status + " " + req.statusText + " " + './savePlayer.php');
       }
@@ -167,54 +167,17 @@ export class GameService {
     });
 
   }
-/*
-  loadPlayer(name,password) {
-    let fileName = 'filename=' + name + '.txt';
-    let loadRequest= 'name='+name+'&password='+password;
-
-    // send save loadRequest to server
-    let req = new XMLHttpRequest();
-    let gameservice = this;
-
-    req.open("POST", './loadPlayer.php');
-    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    req.send(loadRequest);
-    req.addEventListener("load", function () {
-      if (req.status >= 200 && req.status < 400) {
-        gameservice.callbackload(req.responseText);
-      } else {
-        console.error(req.status + " " + req.statusText + " " + './loadPlayer.php');
-      }
-    });
-    req.addEventListener("error", function () {
-      console.error("Erreur réseau avec l'URL " + './loadPlayer.php');
-    });
-  }
-*/
 
   /***********************************/
-  /* Ajax callabck from savePlayer() */
+  /* Ajax callabck from login() */
   /***********************************/
-  callbackSave(reponse) {
-    if (reponse=='error') {
-      this.message='erreur save';
-      return
-    }
-    console.log('Saved: ' + reponse);
-
-    this.router.navigate(['']);
-  }
-
-  /***********************************/
-  /* Ajax callabck from loadPlayer() */
-  /***********************************/
-  callbackload(reponse) {
+  callbackLogin(reponse) {
     console.log(reponse);
-    if (reponse=='error') {
-      this.message='erreur load';
+    if (reponse == 'error') {
+      this.message = 'erreur de mot de passe';
       return;
     }
-    if (reponse=='save ok') {
+    if (reponse == 'save ok') {
       console.log(reponse);
       this.router.navigate(['']);
       return;
@@ -223,12 +186,11 @@ export class GameService {
     let loadedPLayer = JSON.parse(reponse);
 
     // copy string, boolean or number value to this (GameService)
-    this.name = loadedPLayer.name;
     this.isNoob = loadedPLayer.isNoob;
     this.money = loadedPLayer.money;
 
     // create 'fighter' for each in loadedPLayer.team, copy values, then push to this.items
-    this.team=[];
+    this.team = [];
     if (loadedPLayer.team.length > 0) {
       for (let index = 0; index < loadedPLayer.team.length; index++) {
         const loadedFighter = new Fighter(loadedPLayer.team[index].archetype, this.weaponTypeList, this.armorTypeList);
@@ -245,7 +207,7 @@ export class GameService {
     }
 
     // create 'item' for each in loadedPLayer.items, then push to this.items
-    this.items=[];
+    this.items = [];
     if (loadedPLayer.items.length > 0) {
       for (let index = 0; index < loadedPLayer.items.length; index++) {
         const loadedItem = new Item(loadedPLayer.items[index].itemType, this.itemTypeList);
@@ -254,7 +216,7 @@ export class GameService {
     }
 
     // create 'Weapon' for each in loadedPLayer.weapons, then push to this.weapons
-    this.weapons=[];
+    this.weapons = [];
     if (loadedPLayer.weapons.length > 0) {
       for (let index = 0; index < loadedPLayer.weapons.length; index++) {
         const loadedWeapon = new Weapon(loadedPLayer.weapons[index].type, this.weaponTypeList);
@@ -263,7 +225,7 @@ export class GameService {
     }
 
     // create 'Armor' for each in loadedPLayer.armors, then push to this.armors
-    this.armors=[];
+    this.armors = [];
     if (loadedPLayer.armors.length > 0) {
       for (let index = 0; index < loadedPLayer.armors.length; index++) {
         const loadedArmor = new Armor(loadedPLayer.armors[index].type, this.armorTypeList);

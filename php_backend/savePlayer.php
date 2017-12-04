@@ -1,31 +1,41 @@
 <?php 
 
 // récupère la valeur 'player' de l'array $_POST
-$savedPlayer =$_POST['player'];
-$name = $_POST['name'];
-$password=$_POST['password'];
+$SavedPlayer =$_POST['saves'];
+$SavedPlayerDecoded= json_decode($SavedPlayer);
 
-$fileName=$name.$password.".txt";
+// read saves and convert to object
+$fileName=('saves.json');
+$saves = file_get_contents($fileName);
+$savesDecoded= json_decode($saves);
 
-// create file if it doesn't exist
-$savesFile = fopen($fileName, 'a');
-fclose($savesFile);
+// iterate on saves, look for existing player and check password
+$loadDone=false;
+foreach ($savesDecoded as $playersName => $playersString) {
+    $playersDecoded=json_decode($playersString);
+    
+    if ($playersName == $SavedPlayerDecoded->name && $SavedPlayerDecoded->password==$playersDecoded->password) {
+       echo json_encode($playersDecoded) ;
+       $loadDone=true;
 
-// Load datas
-$savesFile = fopen($fileName, 'r+');
-
-fseek($savesFile, 0);
-$return=fgets($savesFile);
-
-//test result
-if ($return) {
-   echo $return;
-} else {
-    fseek($savesFile, 0);
-    fputs($savesFile, $savedPlayer);
-    echo 'save ok';
+    } elseif ($playersName == $SavedPlayerDecoded->name && $SavedPlayerDecoded->password!=$playersDecoded->password) {
+        echo 'error';
+        $loadDone=true;
+    }
 }
 
-fclose($savesFile);
+//if !player in saves, add it and overwrite saves.json
+if (!$loadDone) {
+    $nameToSave=$SavedPlayerDecoded->name;
+    $savesDecoded->$nameToSave=$SavedPlayer;
+    $saves =json_encode($savesDecoded);
+    
+    $savesFile = fopen($fileName, 'r+');       
+    fseek($savesFile, 0);
+    fputs($savesFile, $saves);      
+    fclose($savesFile);
+    
+    echo 'save ok';
+}
 
 ?>

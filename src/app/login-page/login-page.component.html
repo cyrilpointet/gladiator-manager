@@ -1,6 +1,9 @@
 <div class="background">
   <div class="text">
-    <button (click)="load()">load</button>
+    <p>Nom</p>
+    <input type="text" [(ngModel)]="game.name" placeholder="{{game.name}}">
+    <p>Moyt de passe</p>
+    <input type="text" [(ngModel)]="game.password" placeholder="{{game.password}}">
     <button (click)="save()">save</button>
     <p>{{game.message}}</p>
   </div>

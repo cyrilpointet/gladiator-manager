@@ -1,6 +1,7 @@
 <main class="general-primary">
   <div class="welcome general-primary">
     <h1>Gladiator Manager</h1>
+    <p>Lanista: {{game.name}}</p>
     <a *ngIf="game.team.length > 0 && !game.isNoob" (click)="goArena()" >Entrer dans l'arêne</a>
     <a *ngIf="!game.isNoob" (click)="goMarket()" >Place du Marché</a>
     <a *ngIf="game.isNoob && game.team.length <1" (click)="goTutoMarket()" >Engagez votre premier gladiateur</a>

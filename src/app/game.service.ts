@@ -146,7 +146,7 @@ export class GameService {
     );
 
     // convert player into string
-    let playerSaved = 'player=' + JSON.stringify(this.player)+'&password='+this.password;
+    let playerSaved ='name='+this.name+ '&player=' + JSON.stringify(this.player)+'&password='+this.password;
 
     // send player as string to server
     let req = new XMLHttpRequest();
@@ -157,7 +157,7 @@ export class GameService {
     req.send(playerSaved);
     req.addEventListener("load", function () {
       if (req.status >= 200 && req.status < 400) {
-        gameservice.callbackSave(req.responseText);
+        gameservice.callbackload(req.responseText);
       } else {
         console.error(req.status + " " + req.statusText + " " + './savePlayer.php');
       }
@@ -167,7 +167,7 @@ export class GameService {
     });
 
   }
-
+/*
   loadPlayer(name,password) {
     let fileName = 'filename=' + name + '.txt';
     let loadRequest= 'name='+name+'&password='+password;
@@ -190,6 +190,7 @@ export class GameService {
       console.error("Erreur réseau avec l'URL " + './loadPlayer.php');
     });
   }
+*/
 
   /***********************************/
   /* Ajax callabck from savePlayer() */
@@ -208,9 +209,15 @@ export class GameService {
   /* Ajax callabck from loadPlayer() */
   /***********************************/
   callbackload(reponse) {
+    console.log(reponse);
     if (reponse=='error') {
       this.message='erreur load';
-      return
+      return;
+    }
+    if (reponse=='save ok') {
+      console.log(reponse);
+      this.router.navigate(['']);
+      return;
     }
     // Convert loaded string from API into object
     let loadedPLayer = JSON.parse(reponse);

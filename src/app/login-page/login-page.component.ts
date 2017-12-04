@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameService } from './../game.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
@@ -18,9 +19,6 @@ export class LoginPageComponent implements OnInit {
     console.log('coucou save');
   }
 
-  load(){
-    this.game.loadPlayer(this.game.name,this.game.password);
-  }
   save(){
     this.game.savePlayer();
   }

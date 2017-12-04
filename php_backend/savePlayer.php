@@ -2,34 +2,32 @@
 
 // récupère la valeur 'player' de l'array $_POST
 $datas =$_POST['player'];
+$name = $_POST['name'];
 $password=$_POST['password'];
 
 $datasDecoded= json_decode($datas);
-$name=$datasDecoded->{'name'};
+$savedPlayer=$datasDecoded->{'player'};
 $fileName=$name.$password.".txt";
 
-$monfichier = fopen($fileName, 'a');
-fclose($monfichier);
+// create file if it doesn't exist
+$savesFile = fopen($fileName, 'a');
+fclose($savesFile);
 
-$monfichier = fopen($fileName, 'r+');
+// Load datas
+$savesFile = fopen($fileName, 'r+');
 
-fseek($monfichier, 0);
-fputs($monfichier, $datas);
+fseek($savesFile, 0);
+$return=fgets($savesFile);
 
-fclose($monfichier);
-
-/*
-// access database
-
-try
-{
-    $bdd = new PDO('mysql:host=localhost;dbname=gladiatorsaves;charset=utf8', 'root', '');
+//test result
+if ($return=='') {
+   echo $return;
+} else {
+    fseek($savesFile, 0);
+    fputs($savedPlayer);
+    echo 'save ok';
 }
-catch (Exception $e)
-{
-        die('Erreur : ' . $e->getMessage());
-}
-*/
-echo $fileName;
+
+fclose($savesFile);
 
 ?>

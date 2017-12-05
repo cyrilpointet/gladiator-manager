@@ -32,6 +32,9 @@ export class AppComponent {
       this.router.navigate(['']);
     }
     this.game.isInit=true;
+    if (this.game.name=='') {
+      this.router.navigate(['login']);
+    }
   }
 
 }

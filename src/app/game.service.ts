@@ -34,7 +34,6 @@ export class GameService {
   weaponTypeList: object;
   armorTypeList: object;
   message: string = 'ok';
-  password: string = 's3cr3t';
 
   itemTypeList: object = {
     cure: {
@@ -62,7 +61,8 @@ export class GameService {
   // --------------------------- player variables ---------------------------------------
   //-------------------------------------------------------------------------------------
 
-  name: string = 'Toto';
+  name: string = '';
+  password: string = '';
   isNoob = true;
   team: Array<Fighter> = [];
   items: Array<Item> = [];
@@ -169,7 +169,7 @@ export class GameService {
   }
 
   /***********************************/
-  /* Ajax callabck from login() */
+  /*     Ajax callabck from login()  */
   /***********************************/
   callbackLogin(reponse) {
     console.log(reponse);
@@ -234,6 +234,56 @@ export class GameService {
     }
 
     this.router.navigate(['']);
+  }
+
+  /***********************************/
+  /*             autosave            */
+  /***********************************/
+
+  autosave(){
+    // create Player object
+    let player = {
+      name: this.name,
+      password: this.password,
+      isNoob: this.isNoob,
+      team: this.team,
+      items: this.items,
+      weapons: this.weapons,
+      armors: this.armors,
+      money: this.money
+    };
+
+    // convert player into string
+    let playerSaved = 'saves='+JSON.stringify(player);
+
+    // send player as string to server
+    let req = new XMLHttpRequest();
+    let gameservice = this;
+
+    req.open("POST", './autosave.php');
+    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    req.send(playerSaved);
+    req.addEventListener("load", function () {
+      if (req.status >= 200 && req.status < 400) {
+        gameservice.callbackAutosave(req.responseText);
+      } else {
+        console.error(req.status + " " + req.statusText + " " + './savePlayer.php');
+      }
+    });
+    req.addEventListener("error", function () {
+      console.error("Erreur réseau avec l'URL " + './savePlayer.php');
+    });
+  }
+
+  /***********************************/
+  /*    Ajax callabck from autosave  */
+  /***********************************/
+  callbackAutosave(reponse){
+    console.log(reponse);
+    if (reponse == 'saveok') {
+      this.message = 'sauvegarde auto ok';
+      return;
+    }
   }
 }
 

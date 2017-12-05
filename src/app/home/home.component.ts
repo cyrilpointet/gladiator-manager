@@ -18,6 +18,7 @@ export class HomeComponent {
 
   ngOnInit() {
     console.log('coucou home');
+    this.game.autosave();
   }
 
   goArena() {

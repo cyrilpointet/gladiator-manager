@@ -8,6 +8,5 @@
     <a *ngIf="game.team.length > 0 && game.isNoob" (click)="goTutoStuff()" >Découvrez le Ludus</a>
     <a *ngIf="game.team.length > 0 && !game.isNoob" (click)="goStuff()" >Aller au Ludus</a>
     <a (click)="load()" >Déconnexion</a>
-    <p>{{game.message}}</p>
   </div>
 </main>

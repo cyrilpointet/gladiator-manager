@@ -61,14 +61,14 @@ export class GameService {
   // --------------------------- player variables ---------------------------------------
   //-------------------------------------------------------------------------------------
 
-  name: string = 'toto';
-  password: string = 'toto';
-  isNoob = false;
+  name: string = '';
+  password: string = '';
+  isNoob = true;
   team: Array<Fighter> = [];
   items: Array<Item> = [];
   weapons: Array<Weapon> = [];
   armors: Array<Armor> = [];
-  money: number = 10000;
+  money: number = 500;
 
   counterTeam: Array<Fighter> = [];
 

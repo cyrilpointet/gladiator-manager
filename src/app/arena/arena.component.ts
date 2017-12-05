@@ -145,7 +145,7 @@ export class ArenaComponent {
     let answer: boolean = false;
     for (let index = 0; index < squad.length; index++) {
       const element = squad[index];
-      if (element.isAlive) {
+      if (element.isAlive && element.inArena) {
         answer = true;
       }
     }

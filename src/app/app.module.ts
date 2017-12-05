@@ -17,6 +17,7 @@ import { StuffManagerComponent } from './stuff-manager/stuff-manager.component';
 import { TutoMarketComponent } from './tuto-market/tuto-market.component';
 import { TutoStuffComponent } from './tuto-stuff/tuto-stuff.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { TeamSelectionComponent } from './team-selection/team-selection.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
     StuffManagerComponent,
     TutoMarketComponent,
     TutoStuffComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    TeamSelectionComponent
   ],
   imports: [
     BrowserModule,

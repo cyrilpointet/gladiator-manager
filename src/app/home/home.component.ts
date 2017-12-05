@@ -22,7 +22,7 @@ export class HomeComponent {
   }
 
   goArena() {
-    this.router.navigate(['arena']);
+    this.router.navigate(['teamSelection']);
   }
   goMarket() {
     this.router.navigate(['market']);

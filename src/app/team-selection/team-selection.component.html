@@ -1,0 +1,24 @@
+<div class="teamSelection">
+
+<div class="text">
+  <h1>Choisissez vos champions</h1>
+  <p>maximum: 4</p>
+</div>
+
+
+  <div class="teamFightersList">
+    
+    <div (click)="inArena(rank)" [@animState]="fighter.animState" class="teamFighters" *ngFor="let fighter of game.team; index as rank">
+      <h3 class="teamFightersName">{{fighter.name}}</h3>
+      <img class="teamFightersImg" src={{fighter.imageUrl}} alt="fighter.name">
+      <p><i class="icon-heart"></i> {{game.team[rank].hp}} / {{game.team[rank].maxHp}}</p>
+      <p>Victoires: {{game.team[rank].victory}}</p>
+    </div>
+  </div>
+  
+  <div class="buttonsField">
+    <button (click)="goHome()" >Retour</button>    
+    <button (click)="goArena()" *ngIf="NbOfFightersInArena > 0">Entrer dans l'arène</button>
+  </div>
+</div>
+

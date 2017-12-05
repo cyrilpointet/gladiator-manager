@@ -140,7 +140,7 @@ export class MarketComponent implements OnInit {
 
   buyMe(fighter: Fighter, rank) {
 
-    if (this.game.team.length > 3) {
+    if (this.game.team.length > 9) {
       this.message = 'Votre équipe est déjà complète.';
       return;
     } else if (this.game.money < fighter.value) {

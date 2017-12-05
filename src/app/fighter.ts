@@ -61,7 +61,7 @@ export class Fighter {
     maxHp: number = this.hp;
     xp: number=0;
     victory: number=0;
-    inArena: boolean=true;
+    inArena: boolean=false;
 
     // variables for animating
     animState:string='inactive';

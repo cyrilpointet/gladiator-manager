@@ -1,76 +1,77 @@
 <main id="gameboard">
   <div class="arena">
-    
+
     <div class="team">
-        <div class="fighterCard" *ngFor="let fighter of game.team; index as rank">
-            <h1 *ngIf="rank!=null">{{fighter.name}}</h1>
-            <h1 *ngIf="rank==null">{{fighter.race}}</h1>
-            
-            <div class="middlePart">
-              <img src={{fighter.imageUrl}} alt="">
-              <div class="hpGauge" [style.height]="fighter.hpOnMaxHp" [style.backgroundColor]="fighter.hpGaugeColor"></div>
-            </div>
-          
-            <div class="char">
-              <p>
-                <i class="icon-sword"></i> {{fighter.attack}}</p>
-              <p>
-                <i class="icon-shield"></i> {{fighter.defense}}</p>
-              <p>
-                <i class="icon-heart"></i> {{fighter.hp}}</p>
-            </div>
+      <div *ngFor="let fighter of game.team; index as rank">
+        <div class="fighterCard" *ngIf="fighter.inArena">
+          <h1>{{fighter.name}}</h1>
+
+          <div class="middlePart">
+            <img src={{fighter.imageUrl}} alt="">
+            <div class="hpGauge" [style.height]="fighter.hpOnMaxHp" [style.backgroundColor]="fighter.hpGaugeColor"></div>
           </div>
+
+          <div class="char">
+            <p>
+              <i class="icon-sword"></i> {{fighter.attack}}</p>
+            <p>
+              <i class="icon-shield"></i> {{fighter.defense}}</p>
+            <p>
+              <i class="icon-heart"></i> {{fighter.hp}}</p>
+          </div>
+        </div>
+      </div>
     </div>
-  
+
     <div class="opponents">
-        <div class="fighterCard" *ngFor="let fighter of game.counterTeam; index as rank" (click)="clickOnOpponent(rank)">
-            <h1 *ngIf="rank!=null">{{fighter.name}}</h1>
-            <h1 *ngIf="rank==null">{{fighter.race}}</h1>
-            
-            <div class="middlePart">
-              <img src={{fighter.imageUrl}} alt="">
-              <div class="hpGauge" [style.height]="fighter.hpOnMaxHp" [style.backgroundColor]="fighter.hpGaugeColor"></div>
-            </div>
-          
-            <div class="char">
-              <p>
-                <i class="icon-sword"></i> {{fighter.attack}}</p>
-              <p>
-                <i class="icon-shield"></i> {{fighter.defense}}</p>
-              <p>
-                <i class="icon-heart"></i> {{fighter.hp}}</p>
-            </div>
-            <div class="stuff">
-              <p>{{fighter.weapon.name}}</p>
-              <p>{{fighter.armor.name}}</p>
-            </div>
-          </div>    </div>
+      <div class="fighterCard" *ngFor="let fighter of game.counterTeam; index as rank" (click)="clickOnOpponent(rank)">
+        <h1>{{fighter.race}}</h1>
+
+        <div class="middlePart">
+          <img src={{fighter.imageUrl}} alt="">
+          <div class="hpGauge" [style.height]="fighter.hpOnMaxHp" [style.backgroundColor]="fighter.hpGaugeColor"></div>
+        </div>
+
+        <div class="char">
+          <p>
+            <i class="icon-sword"></i> {{fighter.attack}}</p>
+          <p>
+            <i class="icon-shield"></i> {{fighter.defense}}</p>
+          <p>
+            <i class="icon-heart"></i> {{fighter.hp}}</p>
+        </div>
+        <div class="stuff">
+          <p>{{fighter.weapon.name}}</p>
+          <p>{{fighter.armor.name}}</p>
+        </div>
+      </div>
+    </div>
 
   </div>
 
   <div class="playerBoard">
-      <div class="salectedFighter">
-          <h1>Nom: {{game.team[activeFighterIndex].name}}</h1>
-          <h2>Race:{{game.team[activeFighterIndex].race}}</h2>
-        
-          <div class="middlePart">
-            <img src={{game.team[activeFighterIndex].imageUrl}} alt="">
-          </div>
-        
-          <div class="char">
-            <p>Bonus d'attaque: {{game.team[activeFighterIndex].attack}}</p>
-            <p> Bonus de défense: {{game.team[activeFighterIndex].defense}}</p>
-            <p>Points de vie: {{game.team[activeFighterIndex].hp}}</p>
-            <p>Points de vie maximum: {{game.team[activeFighterIndex].maxHp}}</p>
-          </div>
-          <div>
-            <p>Arme: {{game.team[activeFighterIndex].weapon.name}}</p>
-            <p>Armure: {{game.team[activeFighterIndex].armor.name}}</p>
-          </div>
-          <div>
-            <p>valeur= {{game.team[activeFighterIndex].value}}</p>
-          </div>
-        </div>
+    <div class="salectedFighter">
+      <h1>Nom: {{game.team[activeFighterIndex].name}}</h1>
+      <h2>Race:{{game.team[activeFighterIndex].race}}</h2>
+
+      <div class="middlePart">
+        <img src={{game.team[activeFighterIndex].imageUrl}} alt="">
+      </div>
+
+      <div class="char">
+        <p>Bonus d'attaque: {{game.team[activeFighterIndex].attack}}</p>
+        <p> Bonus de défense: {{game.team[activeFighterIndex].defense}}</p>
+        <p>Points de vie: {{game.team[activeFighterIndex].hp}}</p>
+        <p>Points de vie maximum: {{game.team[activeFighterIndex].maxHp}}</p>
+      </div>
+      <div>
+        <p>Arme: {{game.team[activeFighterIndex].weapon.name}}</p>
+        <p>Armure: {{game.team[activeFighterIndex].armor.name}}</p>
+      </div>
+      <div>
+        <p>valeur= {{game.team[activeFighterIndex].value}}</p>
+      </div>
+    </div>
 
     <div class="stuff">
       <app-item *ngFor="let item of game.items; index as rank" [item]="item" [rank]="rank" (clickOnStuff)="clickOnStuff($event)"></app-item>
@@ -80,8 +81,8 @@
       <p>next turn</p>
     </div>
 
-    <div class="fullscreen" (click)="goBack()" >
-        <p>go back</p>
+    <div class="fullscreen" (click)="goBack()">
+      <p>go back</p>
     </div>
   </div>
 

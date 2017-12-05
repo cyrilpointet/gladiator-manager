@@ -1,0 +1,84 @@
+@import '../../sass/style';
+.teamSelection {
+  background-color: black;
+  background: url('../../assets/img/marble.jpg');
+  font-family: 'mainFont';
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  max-height: 100vh;
+  box-sizing: border-box;
+  @include flexInColumn;
+  justify-content: space-around;
+}
+
+.teamFightersList {
+  background: url('../../assets/img/leatherBackground.jpg');
+  border: solid rgba(0, 0, 0, 0.25) 0.5rem;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  padding: 1rem;
+  @include flexInRow;
+  @include shadowed;
+  justify-content: space-around;
+  max-width: 75vw;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.text {
+  background: url('../../assets/img/leatherBackground.jpg');
+  border: solid rgba(0, 0, 0, 0.25) 0.5rem;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  padding: 1rem;
+  @include flexInColumn;
+  @include shadowed;
+  justify-content: space-around;
+  max-width: 75vw;
+  max-height: 25vh;
+  h1 {
+    @extend .capFont;
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1.25rem;
+  }
+}
+
+.teamFighters {
+  background: url("../../assets/img/card.jpg") no-repeat center;
+  background-size: cover;
+  border: solid rgba(0, 0, 0, 0.25) 0.5rem;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  margin: 1rem;
+  padding: 1rem;
+  @include flexInColumn;
+  @include shadowedHoverable;
+  transition: 0.3s;
+  h3 {
+    @extend .capFont;
+    font-size: 1.5rem;
+  }
+  img {
+    width: 8rem;
+    border-radius: 0.5rem;
+  }
+}
+
+.buttonsField {
+  @include flexInRow;
+  justify-content: space-around;
+  width: 75%;
+  button {
+    font-size: 1.5rem;
+    padding: 1.5rem;
+    @include shadowedHoverable;
+    transition: 0.35s;
+    border-radius: 0.25rem;
+    background: url('../../assets/img/marbleFlat.jpg');
+    color: white;
+    font-family: 'mainFont', serif;
+  }
+}

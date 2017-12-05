@@ -63,12 +63,12 @@ export class GameService {
 
   name: string = 'toto';
   password: string = 'toto';
-  isNoob = true;
+  isNoob = false;
   team: Array<Fighter> = [];
   items: Array<Item> = [];
   weapons: Array<Weapon> = [];
   armors: Array<Armor> = [];
-  money: number = 1000;
+  money: number = 10000;
 
   counterTeam: Array<Fighter> = [];
 

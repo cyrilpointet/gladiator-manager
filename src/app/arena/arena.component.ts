@@ -47,7 +47,16 @@ export class ArenaComponent {
       if (this.game.counterTeam.length>4 || this.game.counterTeamValue>this.game.teamValue) {
         this.game.counterTeam.splice(0,1);
       }
-    } while (this.game.counterTeamValue>this.game.teamValue || this.game.counterTeamValue<this.game.teamValue*0.75) 
+    } while (this.game.counterTeamValue>this.game.teamValue || this.game.counterTeamValue<this.game.teamValue*0.75) ;
+
+    this.activeFighterIndex=-1;
+    do {
+      // while active fighter is alive
+      this.activeFighterIndex++;
+      
+      console.log(this.game.team[this.activeFighterIndex].inArena);
+    } while (!(this.game.team[this.activeFighterIndex].isAlive && this.game.team[this.activeFighterIndex].inArena));
+    this.message = ` Choisit la cible de ${this.game.team[this.activeFighterIndex].name}`
 
   }
   
@@ -169,7 +178,7 @@ export class ArenaComponent {
         }
         this.activeFighterIndex = 0;
       }
-    } while (!this.game.team[this.activeFighterIndex].isAlive && this.game.team[this.activeFighterIndex].inArena);
+    } while (!(this.game.team[this.activeFighterIndex].isAlive && this.game.team[this.activeFighterIndex].inArena));
     this.message = ` Choisit la cible de ${this.game.team[this.activeFighterIndex].name}`
   }
 
@@ -203,7 +212,7 @@ export class ArenaComponent {
     let targetIndex: number;
     do {
       targetIndex = this.game.rollDice(0, max);
-    } while (!this.game.team[targetIndex].isAlive && this.game.team[targetIndex].inArena);
+    } while (!(this.game.team[targetIndex].isAlive && this.game.team[targetIndex].inArena));
     return targetIndex;
   }
 

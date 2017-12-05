@@ -33,7 +33,7 @@ export class GameService {
   fighterTypeList: object;
   weaponTypeList: object;
   armorTypeList: object;
-  message: string = 'ok';
+  message: string = '';
 
   itemTypeList: object = {
     cure: {
@@ -61,8 +61,8 @@ export class GameService {
   // --------------------------- player variables ---------------------------------------
   //-------------------------------------------------------------------------------------
 
-  name: string = '';
-  password: string = '';
+  name: string = 'toto';
+  password: string = 'toto';
   isNoob = true;
   team: Array<Fighter> = [];
   items: Array<Item> = [];
@@ -75,7 +75,9 @@ export class GameService {
   get teamValue() {
     let teamValue: number = 0;
     for (var index = 0; index < this.team.length; index++) {
-      teamValue += this.team[index].value;
+      if (this.team[index].inArena) { 
+        teamValue += this.team[index].value;
+      }
     }
     return teamValue;
   }

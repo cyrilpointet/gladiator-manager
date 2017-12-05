@@ -1,5 +1,4 @@
 import { Component, Output, OnInit } from '@angular/core';
-import { FighterBoardComponent } from './../fighter-board/fighter-board.component';
 import { Fighter } from './../fighter';
 import { Item } from './../item';
 import { ItemComponent } from './../item/item.component';
@@ -23,8 +22,6 @@ export class ArenaComponent {
   // -----------------------------------   variables   ----------------------------------
   //-------------------------------------------------------------------------------------
  
-  //game.counterTeam: Array<Fighter> = [];
-  selectedFighter: FighterBoardComponent;
   activeFighterIndex: number = 0;
   message: string = `Choisit la cible de ${this.game.team[this.activeFighterIndex].name}`;
   isplayerTurn: boolean = true;
@@ -52,10 +49,6 @@ export class ArenaComponent {
       }
     } while (this.game.counterTeamValue>this.game.teamValue || this.game.counterTeamValue<this.game.teamValue*0.75) 
 
-    /*
-    let fighterArray: Array<string> = Object.keys(this.game.fighterTypeList);
-    
-    */
   }
   
 
@@ -63,12 +56,8 @@ export class ArenaComponent {
   // ---------------------  methods reacting from chid event emitter---------------------
   //-------------------------------------------------------------------------------------
 
-  clickOnTeammate(clickedBoard) {
-    this.selectedFighter = clickedBoard;
-    // this.message = `Tu as cliqué sur ${clickedBoard.fighter.name} qui râle !`;
-  }
 
-  clickOnOpponent(targetBoard) {
+  clickOnOpponent(rank) {
     if (!this.isplayerTurn) {
       return;
     }
@@ -77,22 +66,18 @@ export class ArenaComponent {
       return;
     }
     if (this.isSomeoneAlive(this.game.counterTeam)) {
-      if (targetBoard.fighter.isAlive) {
+      if (this.game.counterTeam[rank].isAlive) {
         let attacker: Fighter = this.game.team[this.activeFighterIndex];
-        let target: Fighter = targetBoard.fighter;
+        let target: Fighter = this.game.counterTeam[rank];
 
         if (this.attacks(attacker, target)) {
-          this.message = `${attacker.name} a touché ${targetBoard.fighter.name}.`;
-          this.animeFighterClass(targetBoard.fighter, 'shake');
-          this.animeFighterBordercolor(targetBoard.fighter, 'red');
+          this.message = `${attacker.name} a touché ${this.game.counterTeam[rank].name}.`;
           if (!target.isAlive) {
             attacker.xp+=target.maxHp;
             attacker.victory+=1;
           }
         } else {
-          this.message = `${attacker.name} a manqué ${targetBoard.fighter.name}.`;
-          this.animeFighterClass(targetBoard.fighter, 'bounce');
-          this.animeFighterBordercolor(targetBoard.fighter, 'blue');
+          this.message = `${attacker.name} a manqué ${this.game.counterTeam[rank].name}.`;
         }
         // timeout to let animations end
         setTimeout(() => {
@@ -100,7 +85,7 @@ export class ArenaComponent {
         }, 500);
 
       } else {
-        this.message = `${targetBoard.fighter.name} est déjà mort !`;
+        this.message = `${this.game.counterTeam[rank].name} est déjà mort !`;
         return;
       }
     } else {
@@ -184,7 +169,7 @@ export class ArenaComponent {
         }
         this.activeFighterIndex = 0;
       }
-    } while (!this.game.team[this.activeFighterIndex].isAlive);
+    } while (!this.game.team[this.activeFighterIndex].isAlive && this.game.team[this.activeFighterIndex].inArena);
     this.message = ` Choisit la cible de ${this.game.team[this.activeFighterIndex].name}`
   }
 
@@ -195,14 +180,11 @@ export class ArenaComponent {
       setTimeout(() => {
         let attacker: Fighter = this.game.counterTeam[index];
         if (attacker.isAlive && this.isSomeoneAlive(this.game.team)) {
-          this.animeFighterBordercolor(attacker, 'green')
           let target = this.game.team[this.chooseTarget()];
           if (this.attacks(attacker, target)) {
             this.message = `${target.name} a été touche par ${attacker.name}.`;
-            this.animeFighterClass(target, 'shake');
           } else {
             this.message = `${target.name} a esquivé l'attaque.`;
-            this.animeFighterClass(target, 'bounce');
           }
         }
         if (!this.game.team[0].isAlive && this.isSomeoneAlive(this.game.team)) {
@@ -221,7 +203,7 @@ export class ArenaComponent {
     let targetIndex: number;
     do {
       targetIndex = this.game.rollDice(0, max);
-    } while (!this.game.team[targetIndex].isAlive);
+    } while (!this.game.team[targetIndex].isAlive && this.game.team[targetIndex].inArena);
     return targetIndex;
   }
 
@@ -236,21 +218,5 @@ export class ArenaComponent {
     }
   }
 
-  //-------------------------------------------------------------------------------------
-  // --------------------------- animation methods --------------------------------------
-  //-------------------------------------------------------------------------------------
 
-  animeFighterClass(target: Fighter, classe: string = '') {
-    target.classType = classe;
-    setTimeout(() => {
-      target.classType = ' ';
-    }, 500);
-  }
-
-  animeFighterBordercolor(target: Fighter, couleur: string = '') {
-    target.couleurfond = couleur;
-    setTimeout(() => {
-      target.couleurfond = ' ';
-    }, 500);
-  }
 }

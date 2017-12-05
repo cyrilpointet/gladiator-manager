@@ -18,7 +18,7 @@ export class HomeComponent {
 
   ngOnInit() {
     console.log('coucou home');
-    this.game.autosave();
+  //  this.game.autosave();
   }
 
   goArena() {
@@ -36,14 +36,8 @@ export class HomeComponent {
   goTutoStuff() {
     this.router.navigate(['tutoStuff']);
   }
-  /*
-  save(){
-    this.router.navigate(['login']);
-//    this.game.savePlayer();
-  }
-  */
+ 
   load(){
     this.router.navigate(['login']);
-//    this.game.loadPlayer(this.game.name);
   }
 }

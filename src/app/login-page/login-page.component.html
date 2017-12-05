@@ -1,10 +1,16 @@
 <div class="background">
   <div class="text">
+    <h1>Gladiator Manager</h1>
+    <br>
+    <h2>Connexion ou inscription</h2>
+    <br>
     <p>Nom</p>
     <input type="text" [(ngModel)]="game.name" placeholder="{{game.name}}">
-    <p>Moyt de passe</p>
+    <p>Mot de passe</p>
     <input type="text" [(ngModel)]="game.password" placeholder="{{game.password}}">
-    <button (click)="login()">connexion</button>
+    <br>
     <p>{{game.message}}</p>
+    <br>
+    <button (click)="login()">connexion</button>
   </div>
 </div>

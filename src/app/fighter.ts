@@ -61,6 +61,7 @@ export class Fighter {
     maxHp: number = this.hp;
     xp: number=0;
     victory: number=0;
+    inArena: boolean=true;
 
     // variables for animating
     animState:string='inactive';
@@ -84,9 +85,18 @@ export class Fighter {
     }
 
     get value() {
-        let value:number = (this.hp*2) + (this.maxHp*2) + this.weapon.value + this.armor.value + this.xp;
+        let value:number = (this.hp*2) + (this.maxHp*2) + this.attack + this.defense+ this.weapon.value + this.armor.value + this.xp;
         return value
     }
+
+    get hpOnMaxHp() {
+        return `${(this.hp / this.maxHp) * 100}%`;
+      }
+    
+      get hpGaugeColor() {
+        let hue = `${(this.hp / this.maxHp) * 120}`
+        return `hsl(${hue},100%,40%)`;
+      }
 
     stuffMeWeapon(stuffList: Array<string>) {
         let dice = stuffList.length;

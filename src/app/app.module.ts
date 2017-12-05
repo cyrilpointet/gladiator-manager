@@ -8,9 +8,7 @@ import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
 
 import { AppComponent } from './app.component';
-import { FighterBoardComponent } from './fighter-board/fighter-board.component';
 import { ItemComponent } from './item/item.component';
-import { SelectedFighterBoardComponent } from './selected-fighter-board/selected-fighter-board.component';
 import { ArenaComponent } from './arena/arena.component';
 import { GameService } from './game.service';
 import { HomeComponent } from './home/home.component';
@@ -23,9 +21,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 @NgModule({
   declarations: [
     AppComponent,
-    FighterBoardComponent,
     ItemComponent,
-    SelectedFighterBoardComponent,
     ArenaComponent,
     HomeComponent,
     MarketComponent,

@@ -70,11 +70,17 @@ export class StuffManagerComponent implements OnInit {
 
   selectedFighter: number = 0;
   selectedFighterAnim: string = '';
+  music:any;
 
   ngOnInit() {
     console.log('coucou stuff');
     this.game.isNoob = false;
     this.game.team[0].animState = 'stuffSelected';
+
+    this.music = document.getElementById('music');
+    this.music.loop=true;
+    this.music.volume= 0.5;
+    this.music.play();
   }
 
   ngOnDestroy() {

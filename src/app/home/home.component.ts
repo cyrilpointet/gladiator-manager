@@ -16,9 +16,18 @@ export class HomeComponent {
     private game: GameService,
   ) { }
 
+  music:any;
+
   ngOnInit() {
     console.log('coucou home');
     this.game.autosave();
+
+    if (this.game.isNoob) {
+      this.music = document.getElementById('music');
+      this.music.volume= 0.5;
+      this.music.play();
+    }
+
   }
 
   goArena() {

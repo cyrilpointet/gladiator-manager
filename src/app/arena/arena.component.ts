@@ -70,6 +70,7 @@ export class ArenaComponent {
   introArena: any;
   missed: any;
   combatOver:boolean;
+  music:any;
 
   //-------------------------------------------------------------------------------------
   // ---------------------  test variables to be replaced           ---------------------
@@ -126,6 +127,10 @@ export class ArenaComponent {
     this.introArena.pause();
     this.introArena.currentTime = 0;
     this.introArena.play();
+
+    this.music = document.getElementById('music');
+    this.music.volume= 0.5;
+    this.music.play();
   }
 
 

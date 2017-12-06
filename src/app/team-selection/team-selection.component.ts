@@ -41,6 +41,7 @@ export class TeamSelectionComponent implements OnInit {
   ) { }
 
   NbOfFightersInArena: number;
+  music:any
 
   ngOnInit() {
     for (let index = 0; index < this.game.team.length; index++) {
@@ -48,6 +49,11 @@ export class TeamSelectionComponent implements OnInit {
       this.game.team[index].animState = 'inactive';
     }
     this.NbOfFightersInArena = 0;
+
+    this.music = document.getElementById('music');
+    this.music.loop = true;
+    this.music.volume= 0.5;
+    this.music.play();
   }
 
   inArena(rank) {

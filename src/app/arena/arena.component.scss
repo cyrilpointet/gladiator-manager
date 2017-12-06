@@ -1,0 +1,217 @@
+@import '../../sass/style';
+.hidden {
+  display: none;
+}
+
+main {
+  @extend .mainFont;
+  background: url('../../assets/img/marble.jpg');
+  height: 100vh;
+  width: 100vw;
+  max-height: 100vh;
+  max-width: 100vw;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-areas: "playerBoard arena arena";
+}
+
+.arena {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-area: arena;
+  width: 100%;
+  height: 100%;
+  max-height: 100vh;
+  max-width: 100vw;
+  grid-template-rows: 1fr 1fr;
+  grid-auto-columns: 1fr 1fr;
+  grid-template-areas: "opponents opponents" "team team";
+  .team,
+  .opponents {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    grid-area: team;
+    width: 100%;
+    height: 100%;
+  }
+  .opponents {
+    grid-area: opponents;
+  }
+  .team {
+    grid-area: team;
+  }
+  .fighterCard {
+    cursor: pointer;
+    @include gridCenter;
+    grid-template-areas: "fighterName" "middlePart" "char" "fighterstuff";
+    width: 10rem;
+    justify-content: center;
+    background-size: cover;
+    border: solid rgb(228, 221, 208) 0.5rem;
+    box-sizing: border-box;
+    border-radius: 1rem;
+    padding: 1rem;
+    text-align: center;
+    .fighterName {
+      grid-area: fighterName;
+      h1 {
+        @extend .capFont;
+        font-size: 1.5rem;
+      }
+    }
+    .middlePart {
+      grid-area: middlePart;
+      @include gridCenter;
+      grid-auto-flow: column;
+      align-items: baseline;
+      img {
+        width: 6rem;
+        border-radius: 2rem;
+      }
+      .hpGauge {
+        @include shadowed;
+        width: 1rem;
+        height: 100%;
+        margin-left: 0.5rem;
+        transition: 0.3s;
+      }
+    }
+    .char {
+      grid-area: char;
+    }
+    .fighterstuff {
+      grid-area: fighterstuff;
+      @include flexInColumn;
+    }
+  }
+  .inteam {
+    @include shadowed;
+    background: url("../../assets/img/card.jpg") no-repeat center;
+  }
+  .inopponents {
+    @include shadowedHoverable;
+    background: url("../../assets/img/cardBlue.jpg") no-repeat center;
+  }
+}
+
+
+.playerBoard {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  max-width: 100%;
+  max-height: 100vh;
+  grid-area: playerBoard;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-rows: 2fr 1fr 3fr;
+  grid-template-areas: "stuff" "buttonsBoard" "playerBoard";
+  overflow-y: auto;
+}
+
+.buttonsBoard {
+  grid-area: buttonsBoard;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-height: 16vh;
+  @include flexInRow;
+  button {
+    font-size: 1rem;
+    padding: 1rem;
+    @include shadowedHoverable;
+    transition: 0.35s;
+    border-radius: 0.25rem;
+    background: url('../../assets/img/marbleFlat.jpg');
+    color: white;
+    font-family: 'mainFont', serif;
+    margin: 0.5rem;
+    cursor: pointer;
+  }
+}
+
+.stuff {
+  grid-area: stuff;
+  width: 95%;
+  height: 95%;
+  max-height: 33vh;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  background: url('../../assets/img/leatherBackground.jpg');
+  box-sizing: border-box;
+  border: solid rgba(0, 0, 0, 0.25) 0.5rem;
+  border-radius: 0.5rem;
+  
+  overflow-y: auto;
+  app-item {
+    max-width: 50%;
+    cursor: pointer;
+  }
+}
+
+.selectedFighter {
+  grid-area: playerBoard;
+  @include flexInRow;
+  justify-content: space-around;
+  background: url('../../assets/img/leatherBackground.jpg');
+  box-sizing: border-box;
+  border: solid rgba(0, 0, 0, 0.25) 0.5rem;
+  border-radius: 0.5rem;
+  width: 95%;
+  height: 95%;
+  max-height: 49vh;
+  overflow-y: auto;
+  img {
+    width: 95%;
+    border-radius:20%;
+  }
+  h1 {
+    @extend .capFont;
+    font-size: 1.5rem;
+  }
+  h2 {
+    @extend .capFont;    
+  }
+  .char, .selectedFighterstuff {
+    @extend .boldFont;
+  }
+}
+
+.message {
+  grid-area: arena;
+  @include flexInRow;
+  @include shadowed;
+  justify-content: space-around;
+  color: white;
+  width: 100%;
+  height: 100%;
+  font-size: 2rem;
+}
+
+.combatOver {
+  @include gridCenter;
+  z-index: 10;
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('../../assets/img/marble.jpg');
+  p {
+    color: white;
+    font-size: 2rem;
+  }
+}

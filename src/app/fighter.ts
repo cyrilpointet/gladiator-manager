@@ -24,6 +24,8 @@
 /*    armor:object = the armor worn by the fighter                        */
 /*    maxHp:number = maximum of health points                             */
 /*    xp:number = experience points. is added to value                    */
+/*    inArena: boolean = false if a player's fighter isn't selected       */
+/*                          for the arena                                 */
 /*                                                                        */
 /*  getter                                                                */
 /*    isAlive:boolean = return true if the fighter is still alive         */
@@ -61,7 +63,7 @@ export class Fighter {
     maxHp: number = this.hp;
     xp: number=0;
     victory: number=0;
-    inArena: boolean=false;
+    inArena: boolean=true;
 
     // variables for animating
     animState:string='inactive';

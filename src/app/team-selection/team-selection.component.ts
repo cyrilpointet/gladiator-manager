@@ -55,6 +55,10 @@ export class TeamSelectionComponent implements OnInit {
       this.NbOfFightersInArena++;
       this.game.team[rank].inArena = true;
       this.game.team[rank].animState = 'selected';
+      let sound:any = document.getElementById('sound');
+      sound.pause();
+      sound.currentTime = 0;
+      sound.play();
     } else if (this.game.team[rank].inArena == true) {
       this.NbOfFightersInArena--;
       this.game.team[rank].inArena = false;

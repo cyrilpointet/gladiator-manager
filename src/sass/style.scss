@@ -82,13 +82,13 @@ $secondary-opposite-invert: findColorInvert($secondary-opposite);
 }
 
 @mixin shadowed {
-    box-shadow: 0 3px 6px rgba(0,0,0,0.45);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.65);
 }
 
 @mixin shadowedHoverable {
-    box-shadow: 0 3px 6px rgba(0,0,0,0.45);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.65);
     &:hover {
-        box-shadow: 0 14px 28px rgba(0,0,0,0.45);
+        box-shadow: 0 14px 28px rgba(0,0,0,0.65);
     }
 }
 

@@ -4,11 +4,50 @@ import { Item } from './../item';
 import { ItemComponent } from './../item/item.component';
 import { GameService } from './../game.service';
 import { Router } from '@angular/router';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  keyframes
+} from '@angular/animations';
 
 @Component({
   selector: 'app-arena',
   templateUrl: 'arena.component.html',
-  styleUrls: ['arena.component.css']
+  styleUrls: ['arena.component.scss'],
+  animations: [
+    trigger('animState', [
+      state('inactive', style({
+        transform: 'translateY(0)',
+        border: 'solid rgb(228, 221, 208) 0.5rem'
+      })),
+      state('attacking', style({
+        transform: 'translateY(-5rem)',
+        border: 'solid rgb(79, 165, 118) 0.5rem'
+      })),
+      transition('inactive <=> attacking', animate('250ms')),
+      transition('inactive => hurted',
+        animate('400ms', keyframes([
+          style({ border: 'solid red 0.5rem', transform: 'translate(0)', offset: 0 }),
+          style({ transform: 'translate(-1rem)', offset: 0.25 }),
+          style({ transform: 'translate(1rem)', offset: 0.5 }),
+          style({ transform: 'translate(-1rem)', offset: 0.75 }),
+          style({ border: 'solid rgb(228, 221, 208) 0.5rem', transform: 'translate(0)', offset: 1 })
+        ]))
+      ),
+      transition('attacking => hurted',
+        animate('400ms', keyframes([
+          style({ border: 'solid red 0.5rem', transform: 'translate(0,-5rem)', offset: 0 }),
+          style({ transform: 'translate(-1rem,-5rem)', offset: 0.25 }),
+          style({ transform: 'translate(1rem,-5rem)', offset: 0.5 }),
+          style({ transform: 'translate(-1rem,-5rem)', offset: 0.75 }),
+          style({ border: 'solid rgb(79, 165, 118) 0.5rem', transform: 'translate(0,-5rem)', offset: 1 })
+        ]))
+      )
+    ])
+  ]
 })
 export class ArenaComponent {
   constructor(
@@ -21,10 +60,16 @@ export class ArenaComponent {
   //-------------------------------------------------------------------------------------
   // -----------------------------------   variables   ----------------------------------
   //-------------------------------------------------------------------------------------
- 
+
   activeFighterIndex: number = 0;
   message: string = `Choisit la cible de ${this.game.team[this.activeFighterIndex].name}`;
+  endMessage: string;
   isplayerTurn: boolean = true;
+  shout: any;
+  die: any;
+  introArena: any;
+  missed: any;
+  combatOver:boolean;
 
   //-------------------------------------------------------------------------------------
   // ---------------------  test variables to be replaced           ---------------------
@@ -33,36 +78,59 @@ export class ArenaComponent {
   ngOnInit() {
     console.log('coucou arena');
 
+    // Init variable
+    this.combatOver=false;
+
     // Create a random array of fighters
-    
+
     let fighterArray: Array<string> = Object.keys(this.game.fighterTypeList);
 
-    this.game.counterTeam=[];
-   
-    do {
+    this.game.counterTeam = [];
+
+    while (this.game.counterTeamLevel < this.game.teamLevel) {
+
       let dice: number = this.game.rollDice(0, fighterArray.length - 1);
       let newFighterName: string = fighterArray[dice];
       let newFighter: Fighter = this.game.createFighter(newFighterName);
       this.game.counterTeam.push(newFighter);
-      if (this.game.counterTeam.length>4 || this.game.counterTeamValue>this.game.teamValue) {
-        this.game.counterTeam.splice(0,1);
-      }
-    } while (this.game.counterTeamValue>this.game.teamValue || this.game.counterTeamValue<this.game.teamValue*0.75) ;
 
-    this.activeFighterIndex=-1;
+      if (this.game.counterTeam.length > 4) {
+        this.game.counterTeam.splice(this.game.counterTeam.length-1, 1);
+      }
+      
+      if (this.game.counterTeamLevel > this.game.teamLevel) {
+        this.game.counterTeam.splice(this.game.counterTeam.length-1, 1);
+      }
+    };
+
+    // Reset animState for team fighter
+    this.game.team.forEach(fighter => {
+      fighter.animState = 'inactive';
+    });
+    
+    // Prepare the first fighter
+    this.activeFighterIndex = -1;
     do {
       // while active fighter is alive
       this.activeFighterIndex++;
-      
-      console.log(this.game.team[this.activeFighterIndex].inArena);
     } while (!(this.game.team[this.activeFighterIndex].isAlive && this.game.team[this.activeFighterIndex].inArena));
-    this.message = ` Choisit la cible de ${this.game.team[this.activeFighterIndex].name}`
+    this.message = ` Choisit la cible de ${this.game.team[this.activeFighterIndex].name}`;
+    this.game.team[this.activeFighterIndex].animState = 'attacking';
 
+    // Sounds init
+    this.shout = document.getElementById('shout');
+    this.die = document.getElementById('die');
+    this.missed = document.getElementById('missed');
+
+    this.introArena = document.getElementById('introArena');
+    this.introArena.pause();
+    this.introArena.currentTime = 0;
+    this.introArena.play();
   }
-  
+
 
   //-------------------------------------------------------------------------------------
-  // ---------------------  methods reacting from chid event emitter---------------------
+  // --------------------------------  on click methods ---------------------------------
   //-------------------------------------------------------------------------------------
 
 
@@ -81,12 +149,27 @@ export class ArenaComponent {
 
         if (this.attacks(attacker, target)) {
           this.message = `${attacker.name} a touché ${this.game.counterTeam[rank].name}.`;
+          // sound and animation
+          this.game.counterTeam[rank].animState = 'hurted';
+          this.shout.pause();
+          this.shout.currentTime = 0;
+          this.shout.play();
+          setTimeout(() => {
+            this.game.counterTeam[rank].animState = 'inactive';
+          }, 400);
+
           if (!target.isAlive) {
-            attacker.xp+=target.maxHp;
-            attacker.victory+=1;
+            this.die.pause();
+            this.die.currentTime = 0;
+            this.die.play();
+            attacker.xp += target.maxHp;
+            attacker.victory += 1;
           }
         } else {
           this.message = `${attacker.name} a manqué ${this.game.counterTeam[rank].name}.`;
+          this.missed.pause();
+          this.missed.currentTime = 0;
+          this.missed.play();
         }
         // timeout to let animations end
         setTimeout(() => {
@@ -116,6 +199,21 @@ export class ArenaComponent {
     if (event.item.doJob(this.game.team, this.game.counterTeam, this.activeFighterIndex)) {
       this.message = `${event.item.name} a été utilisé(e).`;
       this.game.items.splice(event.rank, 1);
+      if (!this.isSomeoneAlive(this.game.counterTeam)) {
+        let cashGain: number = 0;
+        for (let index = 0; index < this.game.counterTeam.length; index++) {
+          cashGain += this.game.counterTeam[index].value;
+        }
+        this.game.money += cashGain;
+        this.endMessage = `Bravo ! Vous avez gagné ${cashGain} pièces d'or`;
+        this.isplayerTurn = false;
+        setTimeout(() => {
+          this.introArena.pause();
+          this.introArena.currentTime = 0;
+          this.introArena.play();
+          this.combatOver = true;
+        }, 1000);
+      }
       this.nextTurn();
     }
   }
@@ -125,15 +223,15 @@ export class ArenaComponent {
   }
 
   goBack() {
-    
-    let list:Array<Fighter>=[];
-    this.game.team.forEach(function (fighter,index){
-        if (fighter.isAlive) {
-          list.push(fighter);
-        }
+
+    let list: Array<Fighter> = [];
+    this.game.team.forEach(function (fighter, index) {
+      if (fighter.isAlive) {
+        list.push(fighter);
+      }
     })
-    this.game.team=list;
-    this.game.counterTeam=[];
+    this.game.team = list;
+    this.game.counterTeam = [];
     this.router.navigate(['']);
   }
 
@@ -153,14 +251,21 @@ export class ArenaComponent {
   }
 
   nextTurn() {
+    this.game.team[this.activeFighterIndex].animState = 'inactive';
     if (!this.isSomeoneAlive(this.game.counterTeam)) {
       let cashGain: number = 0;
       for (let index = 0; index < this.game.counterTeam.length; index++) {
         cashGain += this.game.counterTeam[index].value;
       }
       this.game.money += cashGain;
-      this.message = `Vous avez gagné ${cashGain} pièces d'or`;
+      this.endMessage = `Bravo ! Vous avez gagné ${cashGain} pièces d'or`;
       this.isplayerTurn = false;
+      setTimeout(() => {
+        this.introArena.pause();
+        this.introArena.currentTime = 0;
+        this.introArena.play();
+        this.combatOver = true;
+      }, 1000);
       return
     }
     do {
@@ -179,6 +284,7 @@ export class ArenaComponent {
         this.activeFighterIndex = 0;
       }
     } while (!(this.game.team[this.activeFighterIndex].isAlive && this.game.team[this.activeFighterIndex].inArena));
+    this.game.team[this.activeFighterIndex].animState = 'attacking'
     this.message = ` Choisit la cible de ${this.game.team[this.activeFighterIndex].name}`
   }
 
@@ -189,11 +295,38 @@ export class ArenaComponent {
       setTimeout(() => {
         let attacker: Fighter = this.game.counterTeam[index];
         if (attacker.isAlive && this.isSomeoneAlive(this.game.team)) {
-          let target = this.game.team[this.chooseTarget()];
+          let targetIndex: number = this.chooseTarget();
+          let target = this.game.team[targetIndex];
           if (this.attacks(attacker, target)) {
             this.message = `${target.name} a été touche par ${attacker.name}.`;
+            this.game.team[targetIndex].animState = 'hurted';
+            // sound and animation
+            this.shout.pause();
+            this.shout.currentTime = 0;
+            this.shout.play();
+            if (!this.isSomeoneAlive(this.game.team)) {
+              this.endMessage = `Ah ! Tous vos gladiateurs sont morts !`;
+              this.isplayerTurn = false;
+              setTimeout(() => {
+                this.introArena.pause();
+                this.introArena.currentTime = 0;
+                this.introArena.play();
+                this.combatOver = true;
+              }, 1000);
+            }
+
+            setTimeout(() => {
+              if (targetIndex == this.activeFighterIndex) {
+                this.game.team[targetIndex].animState = 'attacking';
+              } else {
+                this.game.team[targetIndex].animState = 'inactive';
+              }
+            }, 400);
           } else {
             this.message = `${target.name} a esquivé l'attaque.`;
+            this.missed.pause();
+            this.missed.currentTime = 0;
+            this.missed.play();
           }
         }
         if (!this.game.team[0].isAlive && this.isSomeoneAlive(this.game.team)) {

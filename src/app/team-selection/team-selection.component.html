@@ -3,6 +3,7 @@
 <div class="text">
   <h1>Choisissez vos champions</h1>
   <p>maximum: 4</p>
+  <p>Niveau de l'arène: {{game.teamLevel}}</p>
 </div>
 
 
@@ -20,5 +21,7 @@
     <button (click)="goHome()" >Retour</button>    
     <button (click)="goArena()" *ngIf="NbOfFightersInArena > 0">Entrer dans l'arène</button>
   </div>
+
+  <audio id="sound" src="../assets/sounds/timbale.mp3"></audio>
 </div>
 

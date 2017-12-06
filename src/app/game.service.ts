@@ -68,7 +68,7 @@ export class GameService {
   items: Array<Item> = [];
   weapons: Array<Weapon> = [];
   armors: Array<Armor> = [];
-  money: number = 500;
+  money: number = 1500;
 
   counterTeam: Array<Fighter> = [];
 
@@ -93,6 +93,10 @@ export class GameService {
       teamValue += this.counterTeam[index].value;
     }
     return teamValue;
+  }
+  get counterTeamLevel() {
+    let teamLevel: number = Math.ceil(this.counterTeamValue / 500);
+    return teamLevel;
   }
 
   //-------------------------------------------------------------------------------------

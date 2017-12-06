@@ -117,3 +117,23 @@ $secondary-opposite-invert: findColorInvert($secondary-opposite);
 .mainFont {
     font-family: 'mainFont', serif; 
 }
+
+@media only screen and  (min-width: 1025px ) {
+    .bigText {
+        font-size: 2rem !important;
+    }
+    .medText {
+        font-size: 1.5rem !important;
+    }
+}
+@media only screen and  (max-width: 1024px) {
+    .bigText {
+        font-size: 1.5rem !important;
+    }
+    .medText {
+        font-size: 1rem !important;
+    }
+    .fullscreenOnly {
+        display: none;
+    }
+}

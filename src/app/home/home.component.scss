@@ -11,38 +11,42 @@ main {
 }
 
 .welcome {
-    p, a {
+    p {
         display: block;
         color: black;
-        font-size: 2rem;
     }
     cursor:default;
     h1 {
         @extend .capFont;
-        font-size: 2.5rem;
+//        font-size: 2.5rem;
     }
 
     background: url('../../assets/img/leatherBackground.jpg');
     border: solid rgba(0, 0, 0, 0.25) 0.5rem;
     box-sizing: border-box;
-    width: 50%;
-    height: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-
+    padding: 2rem;
     border-radius: 2rem;
 }
 
 a{
     @include shadowedHoverable;
+    display: block;
+    color: black;
     transition: 0.2s;
     cursor: pointer;
     background: url("../../assets/img/card.jpg") no-repeat center;
     background-size: cover;
-    padding: 1rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
     border-radius: 0.5rem;
     border: solid rgba(0, 0, 0, 0.25) 0.25rem;
     box-sizing: border-box;
+}
+
+.smallButton {
+    font-size: 1rem;
 }

@@ -2,7 +2,7 @@
 
   <div class="title">
     <div class="msg">
-      <h1>
+      <h1 class="bigText">
         Ludus
       </h1>
       <p>Ecole de gladiateurs</p>
@@ -10,14 +10,14 @@
     
     <div class="money">
       <h3>Argent:</h3>
-      <p>{{game.money}} pièces d'or</p>
+      <p class="bigText">{{game.money}} pièces d'or</p>
     </div>
 
   </div>
 
   <div class="fighterSelection">
     <div class="teamFighters" (click)="selectMe(rank)" [@animState]="fighter.animState" *ngFor="let fighter of game.team; index as rank">
-      <p class="teamFightersName">{{fighter.name}}</p>
+      <p class="medText teamFightersName">{{fighter.name}}</p>
       <img class="teamFightersImg" src={{fighter.imageUrl}} alt="fighter.name">
     </div>
   </div>
@@ -29,7 +29,7 @@
       </div>
 
       <div class="selectedFighterStats" [@selectedFighterAnim]="selectedFighterAnim">
-        <input type="text" [(ngModel)]="game.team[selectedFighter].name" placeholder="{{game.team[selectedFighter].name}}">
+        <input class="medText" type="text" [(ngModel)]="game.team[selectedFighter].name" placeholder="{{game.team[selectedFighter].name}}">
         <p>Race: {{game.team[selectedFighter].race}}</p>
         <p>Attaque: {{game.team[selectedFighter].attack}}</p>
         <p>Défense: {{game.team[selectedFighter].defense}}</p>
@@ -39,37 +39,33 @@
       </div>
 
     </div>
-    <div class="wornWeapon selectedFighterStuff" [@selectedFighterAnim]="selectedFighterAnim">
-      <img src={{game.team[selectedFighter].weapon.imageUrl}} alt="game.team[selectedFighter].weapon.name">
+    <div (click)="dropWeapon()" class="wornWeapon selectedFighterStuff" [@selectedFighterAnim]="selectedFighterAnim">
+      <img class="fullscreenOnly" src={{game.team[selectedFighter].weapon.imageUrl}} alt="game.team[selectedFighter].weapon.name">
       <div>
-        <p>{{game.team[selectedFighter].weapon.name}}</p>
+        <p class="medText">{{game.team[selectedFighter].weapon.name}}</p>
         <p>Dégats: {{game.team[selectedFighter].weapon.minDamage}}-{{game.team[selectedFighter].weapon.maxDamage}}</p>
-        <button (click)="dropWeapon()">Poser l'arme</button>
       </div>
     </div>
-    <div class="wornArmor selectedFighterStuff" [@selectedFighterAnim]="selectedFighterAnim">
-      <img src={{game.team[selectedFighter].armor.imageUrl}} alt="game.team[selectedFighter].armor.name">
+    <div (click)="dropArmor()" class="wornArmor selectedFighterStuff" [@selectedFighterAnim]="selectedFighterAnim">
+      <img class="fullscreenOnly" src={{game.team[selectedFighter].armor.imageUrl}} alt="game.team[selectedFighter].armor.name">
       <div>
-        <p>{{game.team[selectedFighter].armor.name}}</p>
+        <p class="medText">{{game.team[selectedFighter].armor.name}}</p>
         <p>Protection: {{game.team[selectedFighter].armor.acBonus}}</p>
-        <button (click)="dropArmor()">Oter l'armure</button>
       </div>
     </div>
   </div>
 
   <div class="teamWeaponList teamList">
-    <div class="teamWeapon" [@toLeft]="'in'" *ngFor="let weapon of game.weapons; index as rank">
+    <div (click)="takeWeapon(rank)" class="teamWeapon" [@toLeft]="'in'" *ngFor="let weapon of game.weapons; index as rank">
       <p>{{weapon.name}}</p>
       <img src={{weapon.imageUrl}} alt="weapon.name">
-      <button (click)="takeWeapon(rank)">Equiper arme</button>
     </div>
   </div>
 
   <div class="teamArmorList teamList">
-    <div class="teamArmor" [@toLeft]="'in'" *ngFor="let armor of game.armors; index as rank">
+    <div (click)="takeArmor(rank)" class="teamArmor" [@toLeft]="'in'" *ngFor="let armor of game.armors; index as rank">
       <p>{{armor.name}}</p>
       <img src={{armor.imageUrl}} alt="armor.name">
-      <button (click)="takeArmor(rank)">Equiper armure</button>
     </div>
   </div>
 

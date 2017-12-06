@@ -93,8 +93,6 @@ button {
     border-radius: 0.5rem;
     grid-area: navButton;
     button {
-      width: 45%;
-      height: 45%;
       padding: 0.5rem;
     }
   }
@@ -153,6 +151,7 @@ button {
 .weaponsInTeam,
 .armorsInTeam,
 .itemsInTeam {
+  cursor: pointer;
   background: url("../../assets/img/card.jpg") no-repeat center;
   background-size: cover;
   @include shadowed;
@@ -164,16 +163,10 @@ button {
   padding: 0.5rem;
   @include gridCenter;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 3fr 2fr;
-  grid-template-areas: "insideImg  insideText" "insideButton insideButton";
+  grid-template-rows: 3fr;
+  grid-template-areas: "insideImg  insideText";
   input {
     width: 80%;
-  }
-  button {
-      height: 3rem;
-      width: 80%;
-      color: white;
-      font-size: 1rem;
   }
   .insideImg {
     grid-area: insideImg;
@@ -182,11 +175,6 @@ button {
   .insideText {
     text-align: center;
     grid-area: insideText;
-  }
-  .insideButton {
-    grid-area: insideButton;
-    margin: 0;
-    padding: 0;
   }
 
 }

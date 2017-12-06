@@ -1,24 +1,24 @@
 <div class="marketPage">
 
   <div class="enseigne">
-    <h1>Place du marché</h1>
+    <h1 class="bigText">Place du marché</h1>
   </div>
 
   <div class="buttonsField">
-    <button class=" is-opposite mainFont" (click)="showFighters()">Marché aux gladiateurs</button>
-    <button class=" is-opposite mainFont" (click)="showItems()">Antre du sorcier</button>
-    <button class=" is-opposite mainFont" (click)="showWeapons()">Forge des armes</button>
-    <button class=" is-opposite mainFont" (click)="showArmors()">Fabricant d'armures</button>
+    <button class="medText is-opposite mainFont" (click)="showFighters()">Marché aux gladiateurs</button>
+    <button class="medText is-opposite mainFont" (click)="showItems()">Antre du sorcier</button>
+    <button class="medText is-opposite mainFont" (click)="showWeapons()">Forge des armes</button>
+    <button class="medText is-opposite mainFont" (click)="showArmors()">Fabricant d'armures</button>
   </div>
 
 
   <div class="market">
     <div class="saleTeamTitle">
-      <h2>Gladiateurs et objets à vendre</h2>
+      <h2 class="medText">Gladiateurs et objets à vendre</h2>
     </div>
 
     <div class="onSaleCategory" *ngIf="marketPlace=='fighters'">
-      <div class="fighterOnSale" [@toRight]="'in'" *ngFor="let fighter of availableFighters; index as rank">
+      <div (click)="buyMe(fighter,rank)" class="fighterOnSale" [@toRight]="'in'" *ngFor="let fighter of availableFighters; index as rank">
         <img class="insideImg" src={{fighter.imageUrl}} alt="">
         <div class="insideText">
           <p class="boldFont">{{fighter.name}}</p>
@@ -30,42 +30,38 @@
             <i class="icon-heart"></i> {{fighter.hp}}</p>
           <p>Prix: {{fighter.value}}</p>
         </div>
-        <button class="insideButton" (click)="buyMe(fighter,rank)">Acheter</button>
       </div>
     </div>
 
     <div class="onSaleCategory" *ngIf="marketPlace=='weapons'">
-      <div class="weaponsOnSale" [@toRight]="'in'" *ngFor="let weapon of availableWeapons; index as rank">
+      <div (click)="buyWeapon(weapon)" class="weaponsOnSale" [@toRight]="'in'" *ngFor="let weapon of availableWeapons; index as rank">
         <img class="insideImg" src={{weapon.imageUrl}} alt="">
         <div class="insideText">
           <p class="boldFont">{{weapon.name}}</p>
           <p>Dégats: {{weapon.minDamage}}-{{weapon.maxDamage}}</p>
           <p>Prix: {{weapon.value}}</p>
         </div>
-        <button class="button is-opposite insideButton" (click)="buyWeapon(weapon)">Acheter</button>
       </div>
     </div>
 
     <div class="onSaleCategory" *ngIf="marketPlace=='armors'">
-      <div class="armorsOnSale" [@toRight]="'in'" *ngFor="let armor of availableArmors; index as rank">
+      <div (click)="buyArmor(armor)" class="armorsOnSale" [@toRight]="'in'" *ngFor="let armor of availableArmors; index as rank">
         <img class="insideImg" src={{armor.imageUrl}} alt="">
         <div class="insideText">
           <p class="boldFont">{{armor.name}}</p>
           <p>Protection: {{armor.acBonus}}</p>
           <p>Prix: {{armor.value}}</p>
         </div>
-        <button class="button is-opposite insideButton" (click)="buyArmor(armor)">Acheter</button>
       </div>
     </div>
 
     <div class="onSaleCategory" *ngIf="marketPlace=='items'">
-      <div class="itemsOnSale" [@toRight]="'in'" *ngFor="let item of availableItems; index as rank">
+      <div (click)="buyItem(item)" class="itemsOnSale" [@toRight]="'in'" *ngFor="let item of availableItems; index as rank">
         <img src={{item.imageUrl}} alt="">
         <div class="insideText">
           <p class="boldFont">{{item.name}}</p>
           <p>Prix: {{item.value}}</p>
         </div>
-        <button class="button is-opposite" (click)="buyItem(item)">Acheter</button>
       </div>
     </div>
 
@@ -74,19 +70,19 @@
 
   <div class="message">
     <p class="navMessage">{{message}}</p>
-    <p class="navMoney">{{game.money}} pièces d'or.</p>
+    <p class="bigText navMoney">{{game.money}} pièces d'or.</p>
     <div class="navButton">      
-      <button class="mainFont is-opposite" (click)="goBack()">Accueil</button>
+      <button class="mainFont medText is-opposite" (click)="goBack()">Accueil</button>
     </div>
 
   </div>
 
   <div class="team">
     <div class="saleTeamTitle">
-      <h2>Votre équipe et objets</h2>
+      <h2 class="medText">Votre équipe et objets</h2>
     </div>
     <div class="teamCategory" *ngIf="marketPlace=='fighters'">
-      <div class="fighterInTeam" [@toLeft]="'in'" *ngFor="let fighter of game.team; index as rank">
+      <div (click)="sellMe(rank)" class="fighterInTeam" [@toLeft]="'in'" *ngFor="let fighter of game.team; index as rank">
         <img class="insideImg" src={{fighter.imageUrl}} alt="fighter.name">
         <div class="insideText">
           <input class="boldFont" type="text" [(ngModel)]="fighter.name" placeholder="{{fighter.name}}">
@@ -94,7 +90,6 @@
           <p>Armure {{fighter.armor.name}}</p>
           <p>Valeur: {{fighter.value}}</p>
         </div>
-        <button class="button is-opposite insideButton" (click)="sellMe(rank)">Vendre</button>
       </div>
     </div>
 
@@ -109,24 +104,22 @@
     </div>
 
     <div class="teamCategory" *ngIf="marketPlace=='weapons'">
-      <div class="weaponsInTeam" [@toLeft]="'in'" *ngFor="let weapon of game.weapons; index as rank">
+      <div (click)="sellWeapon(rank)" class="weaponsInTeam" [@toLeft]="'in'" *ngFor="let weapon of game.weapons; index as rank">
         <img class="insideImg" src={{weapon.imageUrl}} alt="">
         <div class="insideText">
           <p class="boldFont">{{weapon.name}}</p>
           <p>Prix: {{weapon.value}}</p>
         </div>
-        <button class="button is-opposite insideButton" (click)="sellWeapon(rank)">Vendre</button>
       </div>
     </div>
 
     <div class="teamCategory" *ngIf="marketPlace=='armors'">
-      <div class="armorsInTeam" [@toLeft]="'in'" *ngFor="let armor of game.armors; index as rank">
+      <div (click)="sellArmor(rank)" class="armorsInTeam" [@toLeft]="'in'" *ngFor="let armor of game.armors; index as rank">
         <img class="insideImg" src={{armor.imageUrl}} alt="">
         <div class="insideText">
           <p class="boldFont">{{armor.name}}</p>
           <p>Prix: {{armor.value}}</p>
         </div>
-        <button class="button is-opposite" (click)="sellArmor(rank)">Vendre</button>
       </div>
     </div>
 

@@ -11,7 +11,7 @@
             <img src={{fighter.imageUrl}} alt="">
             <div class="hpGauge" [style.height]="fighter.hpOnMaxHp" [style.backgroundColor]="fighter.hpGaugeColor"></div>
           </div>
-          <div class="char">
+          <div class="char fullscreenOnly">
             <p>
               <i class="icon-sword"></i>:{{fighter.attack}}
               <i class="icon-shield"></i>:{{fighter.defense}}
@@ -20,10 +20,9 @@
               <i class="icon-heart"></i> {{fighter.hp}}
             </p>
           </div>
-          <div class="fighterstuff">
+          <div class="fighterstuff fullscreenOnly">
             <p>{{fighter.weapon.name}}</p>
             <p>{{fighter.armor.name}}</p>
-            <p>{{fighter.animState}}</p>
           </div>
         </div>
       </div>
@@ -38,7 +37,7 @@
           <img src={{fighter.imageUrl}} alt="">
           <div class="hpGauge" [style.height]="fighter.hpOnMaxHp" [style.backgroundColor]="fighter.hpGaugeColor"></div>
         </div>
-        <div class="char">
+        <div class="char fullscreenOnly">
           <p>
             <i class="icon-sword"></i>:{{fighter.attack}}
             <i class="icon-shield"></i>:{{fighter.defense}}

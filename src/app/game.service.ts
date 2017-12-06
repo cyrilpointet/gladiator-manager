@@ -68,7 +68,7 @@ export class GameService {
   items: Array<Item> = [];
   weapons: Array<Weapon> = [];
   armors: Array<Armor> = [];
-  money: number = 1500;
+  money: number = 500;
 
   counterTeam: Array<Fighter> = [];
 

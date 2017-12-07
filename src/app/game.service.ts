@@ -34,6 +34,7 @@ export class GameService {
   weaponTypeList: object;
   armorTypeList: object;
   message: string = '';
+  musicOnOff:boolean = true;
 
   itemTypeList: object = {
     cure: {
@@ -63,7 +64,7 @@ export class GameService {
 
   name: string = '';
   password: string = '';
-  isNoob = false;
+  isNoob = true;
   team: Array<Fighter> = [];
   items: Array<Item> = [];
   weapons: Array<Weapon> = [];

@@ -50,10 +50,12 @@ export class TeamSelectionComponent implements OnInit {
     }
     this.NbOfFightersInArena = 0;
 
-    this.music = document.getElementById('music');
-    this.music.loop = true;
-    this.music.volume= 0.5;
-    this.music.play();
+    if (this.game.musicOnOff) {    
+      this.music = document.getElementById('music');
+      this.music.loop =true;
+      this.music.volume= 0.5;
+      this.music.play();
+    }
   }
 
   inArena(rank) {

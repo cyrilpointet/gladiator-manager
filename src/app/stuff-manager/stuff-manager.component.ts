@@ -77,10 +77,12 @@ export class StuffManagerComponent implements OnInit {
     this.game.isNoob = false;
     this.game.team[0].animState = 'stuffSelected';
 
-    this.music = document.getElementById('music');
-    this.music.loop=true;
-    this.music.volume= 0.5;
-    this.music.play();
+    if (this.game.musicOnOff) {    
+      this.music = document.getElementById('music');
+      this.music.loop =true;
+      this.music.volume= 0.5;
+      this.music.play();
+    }
   }
 
   ngOnDestroy() {

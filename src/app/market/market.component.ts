@@ -73,10 +73,12 @@ export class MarketComponent implements OnInit {
 
   ngOnInit() {
     console.log('coucou market');
-    this.music = document.getElementById('music');
-    this.music.loop =true;
-    this.music.volume= 0.5;
-    this.music.play();
+    if (this.game.musicOnOff) {    
+      this.music = document.getElementById('music');
+      this.music.loop =true;
+      this.music.volume= 0.5;
+      this.music.play();
+    }
 
     // Create a random list of fighters to put on the market
 

@@ -22,12 +22,22 @@ export class HomeComponent {
     console.log('coucou home');
     this.game.autosave();
 
-    if (this.game.isNoob) {
-      this.music = document.getElementById('music');
-      this.music.volume= 0.5;
+    this.music = document.getElementById('music');
+    this.music.loop=true;
+    this.music.volume= 0.5;
+    if (this.game.musicOnOff) {
       this.music.play();
     }
 
+  }
+
+  musicOff(){
+    this.game.musicOnOff=false;
+    this.music.pause();
+  }
+  musicOn(){
+    this.game.musicOnOff=true;
+    this.music.play();
   }
 
   goArena() {
@@ -45,8 +55,15 @@ export class HomeComponent {
   goTutoStuff() {
     this.router.navigate(['tutoStuff']);
   }
- 
   load(){
+    this.game.name = '';
+    this.game.password = '';
+    this.game.isNoob = true;
+    this.game.team = [];
+    this.game.items = [];
+    this.game.weapons = [];
+    this.game.armors = [];
+    this.game.money = 750;
     this.router.navigate(['login']);
   }
 }

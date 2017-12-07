@@ -12,7 +12,7 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private game: GameService,
+    public game: GameService,
   ) { }
 
   ngOnInit() {

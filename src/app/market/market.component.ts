@@ -59,7 +59,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 export class MarketComponent implements OnInit {
 
   constructor(
-    private game: GameService,
+    public game: GameService,
     private router: Router
   ) { }
 

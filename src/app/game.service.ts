@@ -179,13 +179,11 @@ export class GameService {
   /*     Ajax callabck from login()  */
   /***********************************/
   callbackLogin(reponse) {
-    console.log(reponse);
     if (reponse == 'error') {
       this.message = 'erreur de mot de passe';
       return;
     }
     if (reponse == 'save ok') {
-      console.log(reponse);
       this.router.navigate(['']);
       return;
     }
@@ -207,8 +205,8 @@ export class GameService {
         loadedFighter.defense = loadedPLayer.team[index].defense;
         loadedFighter.weapon = new Weapon(loadedPLayer.team[index].weapon.type, this.weaponTypeList);
         loadedFighter.armor = new Armor(loadedPLayer.team[index].armor.type, this.armorTypeList);
-        loadedFighter.xp = loadedPLayer.team[index].name;
-        loadedFighter.victory = loadedPLayer.team[index].name;
+        loadedFighter.xp = loadedPLayer.team[index].xp;
+        loadedFighter.victory = loadedPLayer.team[index].victory;
         this.team.push(loadedFighter);
       }
     }
@@ -286,7 +284,6 @@ export class GameService {
   /*    Ajax callabck from autosave  */
   /***********************************/
   callbackAutosave(reponse){
-    console.log(reponse);
     if (reponse == 'saveok') {
       this.message = 'sauvegarde auto ok';
       return;

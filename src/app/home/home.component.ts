@@ -12,8 +12,8 @@ import { GameService } from './../game.service';
 export class HomeComponent {
 
   constructor(
-    private router: Router,
-    private game: GameService,
+    public router: Router,
+    public game: GameService,
   ) { }
 
   music:any;
@@ -57,16 +57,5 @@ export class HomeComponent {
   }
   goInfo() {
     this.router.navigate(['info']);
-  }
-  load(){
-    this.game.name = '';
-    this.game.password = '';
-    this.game.isNoob = true;
-    this.game.team = [];
-    this.game.items = [];
-    this.game.weapons = [];
-    this.game.armors = [];
-    this.game.money = 750;
-    this.router.navigate(['login']);
   }
 }

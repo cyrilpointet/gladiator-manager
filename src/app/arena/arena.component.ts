@@ -51,7 +51,7 @@ import {
 })
 export class ArenaComponent {
   constructor(
-    private game: GameService,
+    public game: GameService,
     private router: Router
   ) { }
 

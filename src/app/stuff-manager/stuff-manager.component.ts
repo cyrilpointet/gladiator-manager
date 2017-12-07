@@ -64,7 +64,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 export class StuffManagerComponent implements OnInit {
 
   constructor(
-    private game: GameService,
+    public game: GameService,
     private router: Router
   ) { }
 

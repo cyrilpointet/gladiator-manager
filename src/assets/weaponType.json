@@ -54,5 +54,26 @@
         "maxDamage": 50,
         "image":"claw01.jpg",
         "market": false
+      },
+      "fireSword":{
+        "name":"épée de feu",
+        "minDamage": 40,
+        "maxDamage": 75,
+        "image":"fireblade.jpg",
+        "market": true
+      },
+      "iceSword":{
+        "name":"épée de glace",
+        "minDamage": 45,
+        "maxDamage": 70,
+        "image":"iceblade.jpg",
+        "market": true
+      },
+      "ironFist":{
+        "name":"poing de fer",
+        "minDamage": 45,
+        "maxDamage": 70,
+        "image":"golem.jpg",
+        "market": false
       }
 }

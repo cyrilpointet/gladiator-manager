@@ -88,5 +88,25 @@
       "defense": 15,
       "weaponList": ["claw01"],
       "armorList": ["leatherSkin"]
+    },
+    "chaosKnight": {
+      "name": "Guerrier du Chaos",
+      "race": "Guerrier du Chaos",
+      "hp": 70,
+      "image": "chaosKnight.jpg",
+      "attack": 35,
+      "defense": 25,
+      "weaponList": ["fireSword","greatSword"],
+      "armorList": ["chainmail","plateArmor"]
+    },
+    "ironGolem": {
+      "name": "Golem de fer",
+      "race": "Golem de fer",
+      "hp": 110,
+      "image": "golem.jpg",
+      "attack": 50,
+      "defense": 60,
+      "weaponList": ["ironFist"],
+      "armorList": ["ironSkin"]
     }
   }

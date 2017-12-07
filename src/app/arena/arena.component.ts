@@ -88,7 +88,9 @@ export class ArenaComponent {
 
     this.game.counterTeam = [];
 
+    console.log(this.game.teamLevel);
     while (this.game.counterTeamLevel < this.game.teamLevel) {
+      console.log('entrée: trop petit'+this.game.counterTeamLevel);
 
       let dice: number = this.game.rollDice(0, fighterArray.length - 1);
       let newFighterName: string = fighterArray[dice];
@@ -96,11 +98,12 @@ export class ArenaComponent {
       this.game.counterTeam.push(newFighter);
 
       if (this.game.counterTeam.length > 4) {
-        this.game.counterTeam.splice(this.game.counterTeam.length-1, 1);
+        this.game.counterTeam.splice(0, 1);
       }
       
       if (this.game.counterTeamLevel > this.game.teamLevel) {
-        this.game.counterTeam.splice(this.game.counterTeam.length-1, 1);
+        console.log('trop grand'+this.game.counterTeamLevel);
+        this.game.counterTeam.splice(0, 1);
       }
     };
 

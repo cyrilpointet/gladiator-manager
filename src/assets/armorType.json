@@ -40,5 +40,12 @@
         "image":"leatherSkin.jpg",
         "value":150,
         "market": false
+      },
+      "ironSkin":{
+        "name":"peau de fer",
+        "acBonus":40,
+        "image":"golem.jpg",
+        "value":400,
+        "market": false
       }
 }

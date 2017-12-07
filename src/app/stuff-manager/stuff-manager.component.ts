@@ -141,7 +141,7 @@ export class StuffManagerComponent implements OnInit {
   }
 
   healMe() {
-    if (this.game.team[this.selectedFighter].hp < this.game.team[this.selectedFighter].maxHp) {
+    if (this.game.team[this.selectedFighter].hp < this.game.team[this.selectedFighter].maxHp && this.game.money>10) {
       this.game.team[this.selectedFighter].hp += 10;
       if (this.game.team[this.selectedFighter].hp > this.game.team[this.selectedFighter].maxHp) {
         this.game.team[this.selectedFighter].hp = this.game.team[this.selectedFighter].maxHp
@@ -154,20 +154,28 @@ export class StuffManagerComponent implements OnInit {
     }
   }
   attackTrainig() {
-    this.game.team[this.selectedFighter].attack += 5;
-    this.game.money -= 5;
-    let sound: any = document.getElementById('buy');
-    sound.pause();
-    sound.currentTime = 0;
-    sound.play();
+    let compareRace:string= this.game.team[this.selectedFighter].archetype;
+    let compareFighter:Fighter= new Fighter(compareRace, this.game.weaponTypeList, this.game.armorTypeList);
+    if (this.game.money>5 && this.game.team[this.selectedFighter].attack<(compareFighter.attack)+40){ 
+      this.game.team[this.selectedFighter].attack += 5;
+      this.game.money -= 5;
+      let sound: any = document.getElementById('buy');
+      sound.pause();
+      sound.currentTime = 0;
+      sound.play();
+    }
   }
   defenseTrainig() {
-    this.game.team[this.selectedFighter].defense += 5;
-    this.game.money -= 5;
-    let sound: any = document.getElementById('buy');
-    sound.pause();
-    sound.currentTime = 0;
-    sound.play();
+    let compareRace:string= this.game.team[this.selectedFighter].archetype;
+    let compareFighter:Fighter= new Fighter(compareRace, this.game.weaponTypeList, this.game.armorTypeList);
+    if (this.game.money>5 && this.game.team[this.selectedFighter].defense<(compareFighter.defense)+40){
+      this.game.team[this.selectedFighter].defense += 5;
+      this.game.money -= 5;
+      let sound: any = document.getElementById('buy');
+      sound.pause();
+      sound.currentTime = 0;
+      sound.play();
+    }
   }
 
   goHome() {

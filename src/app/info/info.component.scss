@@ -1,0 +1,38 @@
+@import '../../sass/style';
+
+.background {
+    @include gridCenter;
+    background: url("../../assets/img/arena.jpg") no-repeat fixed;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.text {
+    @extend .capFont;
+    background: url('../../assets/img/leatherBackground.jpg');
+    max-width: 80%;
+    border: solid rgba(0, 0, 0, 0.25) 0.5rem;
+    box-sizing: border-box;
+    padding: 2rem;
+    border-radius: 2rem;
+    h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+    h2 {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+    p {
+        font-size: 1.25rem;
+    }
+    button {
+        @include shadowed;        
+        padding: 1rem;
+        background: url('../../assets/img/marbleFlat.jpg');
+        color: white;
+        margin: auto;
+    }
+}

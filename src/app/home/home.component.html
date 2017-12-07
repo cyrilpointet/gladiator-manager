@@ -8,6 +8,9 @@
     <a class="medText" *ngIf="game.team.length > 0 && game.isNoob" (click)="goTutoStuff()">Découvrez le Ludus</a>
     <a class="medText" *ngIf="game.team.length > 0 && !game.isNoob" (click)="goStuff()">Aller au Ludus</a>
     <div class="smallButtonsContainer">
+        <a class="smallButton" (click)="goInfo()">
+            <img src="../assets/img/info.png" alt="">
+          </a>
       <a class="smallButton" (click)="load()">Quitter</a>
       <a class="smallButton" *ngIf="game.musicOnOff" (click)="musicOff()">
         <img src="../assets/img/musicOn.png" alt="">

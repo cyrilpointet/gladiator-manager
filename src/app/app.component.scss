@@ -3,3 +3,42 @@
 .noScreen {
     display: none;
 }
+.turnScreen {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top:0;
+    left:0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: 20;
+    background: black;
+    img {
+        width: 100vw;
+    }
+    @media screen and (orientation: portrait) {
+        display: block;
+    }
+}
+.tooSmall {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top:0;
+    left:0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: 20;
+    background: black;
+    img {
+        width: 100vw;
+    }
+    @media screen and (max-width: 767px) {
+        display: block;
+    }
+}
+   

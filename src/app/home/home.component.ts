@@ -55,6 +55,9 @@ export class HomeComponent {
   goTutoStuff() {
     this.router.navigate(['tutoStuff']);
   }
+  goInfo() {
+    this.router.navigate(['info']);
+  }
   load(){
     this.game.name = '';
     this.game.password = '';

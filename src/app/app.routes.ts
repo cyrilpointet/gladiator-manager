@@ -8,6 +8,7 @@ import { TutoMarketComponent } from './tuto-market/tuto-market.component';
 import { TutoStuffComponent } from './tuto-stuff/tuto-stuff.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { TeamSelectionComponent } from './team-selection/team-selection.component';
+import { InfoComponent } from './info/info.component';
 
 
 
@@ -20,5 +21,6 @@ export const ROUTES: Routes = [
   { path: 'tutomarket', component: TutoMarketComponent },
   { path: 'tutoStuff', component: TutoStuffComponent },
   { path: 'login', component: LoginPageComponent },
-  { path: 'teamSelection', component: TeamSelectionComponent }
+  { path: 'teamSelection', component: TeamSelectionComponent },
+  { path: 'info', component: InfoComponent }
 ];
